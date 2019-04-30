@@ -1,0 +1,30 @@
+{
+  "name": "icofactory",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hnamzian/ICOFactory.git"
+  },
+  "keywords": [
+    "ico",
+    "erc20",
+    "ethereum"
+  ],
+  "author": "h.namazian",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hnamzian/ICOFactory/issues"
+  },
+  "homepage": "https://github.com/hnamzian/ICOFactory#readme",
+  "dependencies": {
+    "openzeppelin-solidity": "^2.2.0"
+  }
+}
