@@ -18,11 +18,11 @@ contract GERC20 is ERC20,
   bool _isCapped;
 
   constructor(
-    uint256 _totalSupply,
-    bool _isMintable,
-    bool _isBurnable,
-    bool _isPausable,
-    bool _isCapped,
-    uint256 _cap
+    uint256 totalSupply,
+    bool isMintable,
+    bool isBurnable,
+    bool isPausable,
+    bool isCapped,
+    uint256 cap
   ) ERC20Capped(cap) public {}
 }
