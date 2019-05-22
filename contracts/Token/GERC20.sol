@@ -24,5 +24,11 @@ contract GERC20 is ERC20,
     bool isPausable,
     bool isCapped,
     uint256 cap
-  ) ERC20Capped(cap) public {}
+  ) ERC20Capped(cap) public {
+    _isMintable = isMintable;
+    _isBurnable = isBurnable;
+    _isPausable = isPausable;
+    _isCapped = isCapped;
+    cap = cap;
+  }
 }
