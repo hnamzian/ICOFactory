@@ -41,4 +41,9 @@ contract GERC20 is ERC20,
     require(_isBurnable, "Token is not Buranable");
     _;
   }
+
+  modifier onlyCapped() {
+    require(_isCapped, "Token is not Capped");
+    _;
+  }
 }
