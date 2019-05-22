@@ -36,4 +36,9 @@ contract GERC20 is ERC20,
     require(_isMintable, "Token is not Mintable");
     _;
   }
+
+  modifier onlyBurnable() {
+    require(_isBurnable, "Token is not Buranable");
+    _;
+  }
 }
