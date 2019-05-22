@@ -18,10 +18,7 @@ contract GERC20 is ERC20,
   bool isCapped;
 
   constructor(
-    string _name,
-    string _symbol,
     uint256 _totalSupply,
-    uint256 _decimals,
     bool _isMintable,
     bool _isBurnable,
     bool _isPausable,
