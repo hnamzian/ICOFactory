@@ -31,4 +31,9 @@ contract GERC20 is ERC20,
     _isCapped = isCapped;
     cap = cap;
   }
+
+  modifier onlyMintable() {
+    require(_isMintable, "Token is not Mintable");
+    _;
+  }
 }
