@@ -12,10 +12,10 @@ contract GERC20 is ERC20,
   ERC20Pausable,
   ERC20Capped
 {
-  bool isMintable;
-  bool isBurnable;
-  bool isPausable;
-  bool isCapped;
+  bool _isMintable;
+  bool _isBurnable;
+  bool _isPausable;
+  bool _isCapped;
 
   constructor(
     uint256 _totalSupply,
