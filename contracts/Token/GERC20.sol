@@ -6,7 +6,7 @@ import "openzeppelin-solidity/contracts/token/ERC20/ERC20Mintable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Pausable.sol";
 import "openzeppelin-solidity/contracts/token/ERC20/ERC20Capped.sol";
 
-contract GERC20 is ERC20, 
+contract GERC20 is ERC20,
   ERC20Burnable,
   ERC20Mintable,
   ERC20Pausable,
@@ -32,6 +32,10 @@ contract GERC20 is ERC20,
     cap = cap;
   }
 
+  function mint(address to, uint256 value) public onlyMinter returns (bool) {
+    super.mint(to, value);
+  }
+
   modifier onlyMintable() {
     require(_isMintable, "Token is not Mintable");
     _;
@@ -48,7 +52,7 @@ contract GERC20 is ERC20,
   }
 
   modifier onlyPausable() {
-    require(_isPausable, "Token is not Pausable";
+    require(_isPausable, "Token is not Pausable");
     _;
   }
 }
