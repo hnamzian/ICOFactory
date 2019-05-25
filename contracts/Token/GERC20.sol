@@ -30,7 +30,7 @@ contract GERC20 is ERC20,
         _isBurnable = isBurnable;
         _isPausable = isPausable;
         _isCapped = isCapped;
-        cap = cap;
+        cap = isCapped ? cap : uint256(-1);
     }
 
     function mint(address to, uint256 value) public onlyMinter returns (bool) {
