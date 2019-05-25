@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -26,5 +26,8 @@
   "homepage": "https://github.com/hnamzian/ICOFactory#readme",
   "dependencies": {
     "openzeppelin-solidity": "^2.2.0"
+  },
+  "devDependencies": {
+    "jest": "^24.8.0"
   }
 }
