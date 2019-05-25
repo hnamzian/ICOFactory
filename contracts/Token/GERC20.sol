@@ -12,55 +12,55 @@ contract GERC20 is ERC20,
   ERC20Pausable,
   ERC20Capped
 {
-  bool _isMintable;
-  bool _isBurnable;
-  bool _isPausable;
-  bool _isCapped;
+    bool _isMintable;
+    bool _isBurnable;
+    bool _isPausable;
+    bool _isCapped;
 
-  constructor(
-    uint256 totalSupply,
-    bool isMintable,
-    bool isBurnable,
-    bool isPausable,
-    bool isCapped,
-    uint256 cap
-  ) ERC20Capped(cap) public {
-    _isMintable = isMintable;
-    _isBurnable = isBurnable;
-    _isPausable = isPausable;
-    _isCapped = isCapped;
-    cap = cap;
-  }
+    constructor(
+      uint256 totalSupply,
+      bool isMintable,
+      bool isBurnable,
+      bool isPausable,
+      bool isCapped,
+      uint256 cap
+    ) ERC20Capped(cap) public {
+        _isMintable = isMintable;
+        _isBurnable = isBurnable;
+        _isPausable = isPausable;
+        _isCapped = isCapped;
+        cap = cap;
+    }
 
-  function mint(address to, uint256 value) public onlyMinter returns (bool) {
-    super.mint(to, value);
-  }
+    function mint(address to, uint256 value) public onlyMinter returns (bool) {
+        super.mint(to, value);
+    }
 
-  function burn(uint256 value) public onlyBurnable {
-    super.burn(value);
-  }
+    function burn(uint256 value) public onlyBurnable {
+        super.burn(value);
+    }
 
-  function burnFrom(address from, uint256 value) public onlyBurnable {
-    super.burnFrom(from, value);
-  }
+    function burnFrom(address from, uint256 value) public onlyBurnable {
+        super.burnFrom(from, value);
+    }
 
-  modifier onlyMintable() {
-    require(_isMintable, "Token is not Mintable");
-    _;
-  }
+    modifier onlyMintable() {
+        require(_isMintable, "Token is not Mintable");
+        _;
+    }
 
-  modifier onlyBurnable() {
-    require(_isBurnable, "Token is not Buranable");
-    _;
-  }
+    modifier onlyBurnable() {
+        require(_isBurnable, "Token is not Buranable");
+        _;
+    }
 
-  modifier onlyCapped() {
-    require(_isCapped, "Token is not Capped");
-    _;
-  }
+    modifier onlyCapped() {
+        require(_isCapped, "Token is not Capped");
+        _;
+    }
 
-  modifier onlyPausable() {
-    require(_isPausable, "Token is not Pausable");
-    _;
-  }
+    modifier onlyPausable() {
+        require(_isPausable, "Token is not Pausable");
+        _;
+    }
 }
