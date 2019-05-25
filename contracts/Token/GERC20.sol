@@ -36,6 +36,10 @@ contract GERC20 is ERC20,
         super.burnFrom(from, value);
     }
 
+    function pause() public onlyPausable {
+        super.pause();
+    }
+
     modifier onlyBurnable() {
         require(_isBurnable, "Token is not Buranable");
         _;
