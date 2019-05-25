@@ -33,7 +33,7 @@ contract GERC20 is ERC20,
         cap = isCapped ? cap : uint256(-1);
     }
 
-    function mint(address to, uint256 value) public onlyMinter returns (bool) {
+    function mint(address to, uint256 value) public onlyMintable returns (bool) {
         super.mint(to, value);
     }
 
