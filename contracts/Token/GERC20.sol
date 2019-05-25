@@ -42,11 +42,6 @@ contract GERC20 is ERC20,
         super.burnFrom(from, value);
     }
 
-    modifier onlyMintable() {
-        require(_isMintable, "Token is not Mintable");
-        _;
-    }
-
     modifier onlyBurnable() {
         require(_isBurnable, "Token is not Buranable");
         _;
