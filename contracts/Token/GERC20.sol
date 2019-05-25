@@ -55,11 +55,6 @@ contract GERC20 is ERC20,
         _;
     }
 
-    modifier onlyCapped() {
-        require(_isCapped, "Token is not Capped");
-        _;
-    }
-
     modifier onlyPausable() {
         require(_isPausable, "Token is not Pausable");
         _;
