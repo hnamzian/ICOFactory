@@ -26,6 +26,7 @@ contract GERC20 is ERC20,
       uint256 cap
     ) ERC20Capped(cap) public {
         if (!isMintable) require(totalSupply > 0, "totalSupply must be greater than 0");
+        _totalSupply = totalSupply;
         _isMintable = isMintable;
         _isBurnable = isBurnable;
         _isPausable = isPausable;
