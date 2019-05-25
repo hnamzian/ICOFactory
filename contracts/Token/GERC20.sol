@@ -19,11 +19,15 @@ contract GERC20 is ERC20,
     bool _isCapped;
 
     constructor(
+      string memory name,
+      string memory symbol,
+      uint8 decimals,
       bool isBurnable,
       bool isPausable,
       bool isCapped,
       uint256 cap
-    ) ERC20Capped(cap) public {
+    ) ERC20Capped(cap)
+      ERC20Detailed(name, symbol, decimals) public {
         _isBurnable = isBurnable;
         _isPausable = isPausable;
         _isCapped = isCapped;
