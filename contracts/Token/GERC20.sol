@@ -12,7 +12,6 @@ contract GERC20 is ERC20,
   ERC20Pausable,
   ERC20Capped
 {
-    bool _isMintable;
     bool _isBurnable;
     bool _isPausable;
     bool _isCapped;
