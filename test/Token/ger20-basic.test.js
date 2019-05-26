@@ -84,4 +84,26 @@ contract("GERC20", accounts => {
     assert.equal(+fromOriginBalance - +fromFinalBalance, spends);
     assert.equal(+toFinalBalance - +toOriginBalance, spends);
   });
+
+  it("should throw error to spende more than allowance", async () => {
+    let token = await GERC20.deployed();
+    const minter = accounts[0];
+    const from = accounts[1];
+    const spender = accounts[2];
+    const to = accounts[3];
+    const amount = 10;
+    const approval = 5;
+    const spends = 10;
+    let revert;
+
+    await token.mint(from, amount, { from: minter });
+    await token.approve(spender, approval, { from });
+
+    try {
+      await token.transferFrom(from, to, spends, { from: spender });
+    } catch (ex) {
+      revert = ex.message.includes("revert");
+    }
+    assert.equal(revert, true);
+  });
 });
