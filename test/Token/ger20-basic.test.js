@@ -42,4 +42,20 @@ contract("GERC20", accounts => {
     assert.equal(+fromOriginBalance - +fromFinalBalance, 1);
     assert.equal(+toFinalBalance - +toOriginBalance, 1);
   });
+
+  it("should throw error on transferring more than owned balance", async () => {
+    let token = await GERC20.deployed();
+    const from = accounts[1];
+    const to = accounts[2];
+    let revert;
+
+    await token.mint(accounts[1], 1, { from: accounts[0] });
+    let fromOriginBalance = await token.balanceOf(from);
+    try {
+      await token.transfer(to, +fromOriginBalance + 1, { from });
+    } catch (ex) {
+      revert = ex.message.includes("revert");
+    }
+    assert.equal(revert, true);
+  });
 });
