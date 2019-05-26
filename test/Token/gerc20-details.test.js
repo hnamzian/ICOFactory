@@ -24,4 +24,10 @@ contract("GERC20", accounts => {
     const name = await token.name.call();
     assert.equal(name, tokenArgs.name);
   });
+
+  it("should check token symbol", async () => {
+    let token = await GERC20.deployed();
+    const symbol = await token.symbol.call();
+    assert.equal(symbol, tokenArgs.symbol);
+  });
 });
