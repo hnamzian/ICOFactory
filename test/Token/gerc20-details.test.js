@@ -30,4 +30,10 @@ contract("GERC20", accounts => {
     const symbol = await token.symbol.call();
     assert.equal(symbol, tokenArgs.symbol);
   });
+
+  it("should check token decimals", async () => {
+    let token = await GERC20.deployed();
+    const decimals = await token.decimals.call();
+    assert.equal(decimals, tokenArgs.decimals);
+  });
 });
