@@ -25,4 +25,21 @@ contract("GERC20", accounts => {
     const balance = await token.balanceOf(accounts[1]);
     assert.equal(+balance, 1);
   });
+
+  it("should transfer token", async () => {
+    let token = await GERC20.deployed();
+    const from = accounts[1];
+    const to = accounts[2];
+
+    await token.mint(accounts[1], 1, { from: accounts[0] });
+    let fromOriginBalance = await token.balanceOf(from);
+    let toOriginBalance = await token.balanceOf(accounts[2]);
+
+    await token.transfer(to, 1, { from });
+    let fromFinalBalance = await token.balanceOf(from);
+    let toFinalBalance = await token.balanceOf(to);
+
+    assert.equal(+fromOriginBalance - +fromFinalBalance, 1);
+    assert.equal(+toFinalBalance - +toOriginBalance, 1);
+  });
 });
