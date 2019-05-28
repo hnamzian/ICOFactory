@@ -1,6 +1,8 @@
 pragma solidity ^0.5.2;
 
-contract SalesRounds {
+import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+
+contract SalesRounds is Ownable {
   struct Round {
     uint256 opening;  // opening timestamp of Round
     uint256 ending;   // ending timestamp of Round
