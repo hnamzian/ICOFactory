@@ -31,6 +31,10 @@ contract SalesRounds is Ownable {
     _addRound(_opening, _ending, _tokenPerEth, _tokenCap, _minTokensInvest, _maxTokensInvest);
   }
 
+  function removeRound(uint8 roundIndex) public onlyOwner {
+    _removeRound(roundIndex);
+  }
+
   function _addRound(
     uint256 _opening,
     uint256 _ending,
