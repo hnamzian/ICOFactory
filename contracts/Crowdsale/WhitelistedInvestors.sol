@@ -10,5 +10,10 @@ contract WhitelistedInvestors is Ownable {
   event InvestorRemoved(address indexed account);
 
   Roles.Role private _investors;
+
+  function _addInvestor(address account) internal {
+    _investors.add(account);
+    emit InvestorAdded(account);
+  }
   
 }
