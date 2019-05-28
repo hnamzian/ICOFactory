@@ -21,6 +21,17 @@ contract SalesRounds is Ownable {
   uint256 maxTokensInvest);
   event RoundRemoved(uint8 roundIndex);
 
+  function isSalesRunning() public view returns (bool) {
+    Round memory round;
+    for (uint8 i = 0; i < Rounds.length; i++) {
+      round = Rounds[i];
+      if (block.timestamp > round.opening && block.timestamp < round.opening + round.duration) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   function addRound(
     uint256 _opening,
     uint256 _duration,
