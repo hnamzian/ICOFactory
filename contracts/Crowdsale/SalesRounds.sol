@@ -19,6 +19,7 @@ contract SalesRounds is Ownable {
   uint256 tokenCap,
   uint256 minTokensInvest,
   uint256 maxTokensInvest);
+  event RoundRemoved(uint8 roundIndex);
 
   function addRound(
     uint256 _opening,
@@ -48,13 +49,15 @@ contract SalesRounds is Ownable {
     emit RoundAdded(_opening, _ending, _tokenPerEth, _tokenCap, _minTokensInvest, _maxTokensInvest);
   }
 
-  function _removeRound(uint256 roundIndex) internal {
+  function _removeRound(uint8 roundIndex) internal {
     require(roundIndex < Rounds.length, "invalid round index");
 
-    for (uint i = roundIndex; i < Rounds.length-1; i++){
+    for (uint8 i = roundIndex; i < Rounds.length-1; i++){
       Rounds[i] = Rounds[i+1];
     }
     delete Rounds[Rounds.length-1];
     Rounds.length--;
+
+    emit RoundRemoved(roundIndex);
   }
 }
