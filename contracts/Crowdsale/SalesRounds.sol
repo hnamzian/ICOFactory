@@ -47,4 +47,14 @@ contract SalesRounds is Ownable {
 
     emit RoundAdded(_opening, _ending, _tokenPerEth, _tokenCap, _minTokensInvest, _maxTokensInvest);
   }
+
+  function _removeRound(uint256 roundIndex) internal {
+    require(roundIndex < Rounds.length, "invalid round index");
+
+    for (uint i = roundIndex; i < Rounds.length-1; i++){
+      Rounds[i] = Rounds[i+1];
+    }
+    delete Rounds[Rounds.length-1];
+    Rounds.length--;
+  }
 }
