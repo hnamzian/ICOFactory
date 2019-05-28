@@ -5,4 +5,7 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract WhitelistedInvestors is Ownable {
   using Roles for Roles.Role;
+
+  event InvestorAdded(address indexed account);
+  event InvestorRemoved(address indexed account);
 }
