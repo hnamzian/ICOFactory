@@ -57,6 +57,15 @@ contract SalesRounds is Ownable {
     _removeRound(roundIndex);
   }
 
+  function getTokensPerEther() public view returns (uint256) {
+    uint8 roundIndex = _getRoundIndex();
+    if (roundIndex < Rounds.length) {
+      Round memory round = Rounds[roundIndex];
+      return round.tokensPerEth;
+    }
+    return 0;
+  }
+
   function _addRound(
     uint256 _opening,
     uint256 _duration,
