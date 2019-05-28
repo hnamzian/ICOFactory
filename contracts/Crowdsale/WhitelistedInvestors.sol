@@ -11,6 +11,11 @@ contract WhitelistedInvestors is Ownable {
 
   Roles.Role private _investors;
 
+  modifier onlyInvestor() {
+    require(isInvestor(msg.sender));
+    _;
+  }
+
   function isInvestor(address account) public view returns (bool) {
     return _investors.has(account);
   }
