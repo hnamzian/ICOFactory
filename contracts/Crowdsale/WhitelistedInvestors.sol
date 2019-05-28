@@ -8,4 +8,7 @@ contract WhitelistedInvestors is Ownable {
 
   event InvestorAdded(address indexed account);
   event InvestorRemoved(address indexed account);
+
+  Roles.Role private _investors;
+  
 }
