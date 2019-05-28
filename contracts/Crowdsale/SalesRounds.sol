@@ -10,5 +10,12 @@ contract SalesRounds {
     uint256 maxTokensInvest;  // maximum amount of tokens can be purchased individually
   }
   Round[] Rounds;
+
+  event RoundAdded(uint256 opening,
+  uint256 ending,
+  uint256 tokenPerEth,
+  uint256 tokenCap,
+  uint256 minTokensInvest,
+  uint256 maxTokensInvest);
   
 }
