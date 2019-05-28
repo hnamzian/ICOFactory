@@ -9,5 +9,6 @@ contract SalesRounds {
     uint256 minTokensInvest;  // minimum amount of tokens to be purchased individually
     uint256 maxTokensInvest;  // maximum amount of tokens can be purchased individually
   }
+  Round[] Rounds;
   
 }
