@@ -11,6 +11,10 @@ contract WhitelistedInvestors is Ownable {
 
   Roles.Role private _investors;
 
+  function addInvestor(address account) public onlyOwner {
+    _addInvestor(account);
+  }
+
   function _addInvestor(address account) internal {
     _investors.add(account);
     emit InvestorAdded(account);
