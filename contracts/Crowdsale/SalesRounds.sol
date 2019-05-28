@@ -32,6 +32,12 @@ contract SalesRounds is Ownable {
     return false;
   }
 
+  function isSalesClosed() public view returns (bool) {
+    Round memory round;
+    if (block.timestamp > round.opening + round.duration) return true;
+    return false;
+  }
+
   function addRound(
     uint256 _opening,
     uint256 _duration,
