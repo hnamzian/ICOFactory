@@ -15,5 +15,10 @@ contract WhitelistedInvestors is Ownable {
     _investors.add(account);
     emit InvestorAdded(account);
   }
+
+  function _removeInvestor(address account) internal {
+    _investors.remove(account);
+    emit InvestorRemoved(account);
+  }
   
 }
