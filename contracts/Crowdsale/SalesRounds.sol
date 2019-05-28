@@ -17,5 +17,22 @@ contract SalesRounds {
   uint256 tokenCap,
   uint256 minTokensInvest,
   uint256 maxTokensInvest);
-  
+
+  function _addRound(
+    uint256 _opening,
+    uint256 _ending,
+    uint256 _tokenPerEth,
+    uint256 _tokenCap,
+    uint256 _minTokensInvest,
+    uint256 _maxTokensInvest) internal {
+    Rounds.push(Round({
+      opening: _opening,
+      ending: _ending,
+      tokenPerEth: _tokenPerEth,
+      tokenCap: _tokenCap,
+      minTokensInvest: _minTokensInvest,
+      maxTokensInvest: _maxTokensInvest}));
+
+    emit RoundAdded(_opening, _ending, _tokenPerEth, _tokenCap, _minTokensInvest, _maxTokensInvest);
+  }
 }
