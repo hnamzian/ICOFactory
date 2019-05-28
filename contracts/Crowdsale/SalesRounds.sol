@@ -21,6 +21,11 @@ contract SalesRounds is Ownable {
   uint256 maxTokensInvest);
   event RoundRemoved(uint8 roundIndex);
 
+  modifier onlySalesRunning() {
+    require(isSalesRunning(), "Crowdsale is not running now");
+    _;
+  }
+
   function isSalesRunning() public view returns (bool) {
     Round memory round;
     for (uint8 i = 0; i < Rounds.length; i++) {
