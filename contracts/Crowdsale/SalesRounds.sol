@@ -42,6 +42,11 @@ contract SalesRounds is Ownable {
     uint256 _tokenCap,
     uint256 _minTokensInvest,
     uint256 _maxTokensInvest) internal {
+    if (Rounds.length > 0) {
+      Round memory lastRound = Rounds[Rounds.length-1];
+      require(_opening > lastRound.opening + lastRound.duration, "invalid opening tistamp");
+    }
+
     Rounds.push(Round({
       opening: _opening,
       duration: _duration,
