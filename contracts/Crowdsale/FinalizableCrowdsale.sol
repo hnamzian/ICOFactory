@@ -8,7 +8,7 @@ contract FinalizableCrowdsale is BasicCrowdsale {
   // Refunding: closed and invests must be refunded
   // Finalized: closed and fund raised successfully 
   enum State {Running, Refunding, Finalized}
-  State private state;
+  State internal state;
 
   constructor() public {
     state = State.Running;
