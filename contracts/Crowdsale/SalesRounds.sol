@@ -9,7 +9,7 @@ contract SalesRounds is Ownable {
   struct Round {
     uint256 opening;  // opening timestamp of Round
     uint256 duration;   // Round duration
-    uint256 tokenPerEth;  // amount of tokens in decimals per Ether
+    uint256 tokenWeiPrice;  // token price in wei
     uint256 tokenCap;   // max number of tokens allowed to be purchased at Round
     uint256 minInvest;  // minimum amount of weis to be purchased individually
     uint256 maxInvest;  // maximum amount of weis can be purchased individually
@@ -19,7 +19,7 @@ contract SalesRounds is Ownable {
 
   event RoundAdded(uint256 opening,
   uint256 duration,
-  uint256 tokenPerEth,
+  uint256 tokenWeiPrice,
   uint256 tokenCap,
   uint256 minInvest,
   uint256 maxInvest);
@@ -50,22 +50,22 @@ contract SalesRounds is Ownable {
   function addRound(
     uint256 _opening,
     uint256 _duration,
-    uint256 _tokenPerEth,
+    uint256 _tokenWeiPrice,
     uint256 _tokenCap,
     uint256 _minInvest,
     uint256 _maxInvest) public onlyOwner {
-    _addRound(_opening, _duration, _tokenPerEth, _tokenCap, _minInvest, _maxInvest);
+    _addRound(_opening, _duration, _tokenWeiPrice, _tokenCap, _minInvest, _maxInvest);
   }
 
   function removeRound(uint8 roundIndex) public onlyOwner {
     _removeRound(roundIndex);
   }
 
-  function getTokensPerEther() public view returns (uint256) {
+  function getTokenWeiPrice() public view returns (uint256) {
     uint8 roundIndex = _getRoundIndex();
     if (roundIndex < Rounds.length) {
       Round memory round = Rounds[roundIndex];
-      return round.tokenPerEth;
+      return round.tokenWeiPrice;
     }
     return 0;
   }
@@ -109,7 +109,7 @@ contract SalesRounds is Ownable {
   function _addRound(
     uint256 _opening,
     uint256 _duration,
-    uint256 _tokenPerEth,
+    uint256 _tokenWeiPrice,
     uint256 _tokenCap,
     uint256 _minInvest,
     uint256 _maxInvest) internal {
@@ -121,12 +121,12 @@ contract SalesRounds is Ownable {
     Rounds.push(Round({
       opening: _opening,
       duration: _duration,
-      tokenPerEth: _tokenPerEth,
+      tokenWeiPrice: _tokenWeiPrice,
       tokenCap: _tokenCap,
       minInvest: _minInvest,
       maxInvest: _maxInvest}));
 
-    emit RoundAdded(_opening, _duration, _tokenPerEth, _tokenCap, _minInvest, _maxInvest);
+    emit RoundAdded(_opening, _duration, _tokenWeiPrice, _tokenCap, _minInvest, _maxInvest);
   }
 
   function _removeRound(uint8 roundIndex) internal {
