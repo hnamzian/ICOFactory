@@ -15,6 +15,10 @@ contract FinalizableCrowdsale is BasicCrowdsale {
   }
   
   function finalize() public onlyOwner {
+    _finalize();
+  }
+
+  function _finalize() internal {
     if (etherRaised > hardcap) state = State.Finalized;
     else if (isSalesClosed()) {
       if (etherRaised >= softcap) state = State.Finalized;
