@@ -16,6 +16,8 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
 
   uint256 private _etherRaised;
 
+  event TokensPurchased(address indexed wallet, uint256 weiAmount, uint256 tokens);
+
   constructor(
     uint256 softcap, 
     uint256 hardcap, 
@@ -24,4 +26,6 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
       _hardcap = hardcap;
       _maxIndividualEtherInvest = maxIndividualEtherInvest;
   }
+
+  function buyToken() public payable {}
 }
