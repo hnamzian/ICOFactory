@@ -10,14 +10,14 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
 
   GERC20 private _token;
 
-  uint256 private _softcap;
-  uint256 private _hardcap;
+  uint256 internal _softcap;
+  uint256 internal _hardcap;
+  uint256 internal _etherRaised;
 
   uint256 private _maxIndividualEtherInvest;
 
   mapping (address => uint256) private _invests;
 
-  uint256 private _etherRaised;
 
   event TokensPurchased(address indexed wallet, uint256 weiAmount, uint256 tokens);
 
