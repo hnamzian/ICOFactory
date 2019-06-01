@@ -35,7 +35,11 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
     require(isInvestor(wallet), "wallet is not whitelisted");
     require(_etherRaised.add(weiAmount) < _hardcap, "hardcap reached");
     require(_invests[wallet].add(weiAmount) < _maxIndividualEtherInvest, "individual invest cap reached");
-
+    
+    uint8 roundIndex = _getRoundIndex();
+    uint256 roundInvest = getRoundInvestOf(wallet, roundIndex).add(weiAmount);
+    require(roundInvest <= getRoundMaxInvest(), "individual round invest cap reached");
+    
     return true;
   }
 }
