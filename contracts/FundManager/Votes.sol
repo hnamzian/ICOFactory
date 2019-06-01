@@ -4,11 +4,9 @@ import "./ProjectOwnerRole.sol";
 import "./WhitelistedOracles.sol";
 
 contract Voting is ProjectOwnerRole, WhitelistedOracles {
-  enum VotingType {Funding, CloseProject}
   enum VotingState {Voting, Accepted, Denied}
 
   struct VotingSession {
-    VotingType votingType;
     VotingState state;
     address createdBy;
     mapping (address => bool) voteOf;
@@ -29,5 +27,4 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   FundVoting[] fundVoting;
   CloseProjectVoting[] closeProjectVoting;
 
-  
 }
