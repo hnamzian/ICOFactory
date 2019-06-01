@@ -1,8 +1,11 @@
 pragma solidity ^0.5.2;
 
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract SalesRounds is Ownable {
+  using SafeMath for uint256;
+
   struct Round {
     uint256 opening;  // opening timestamp of Round
     uint256 duration;   // Round duration
@@ -95,6 +98,12 @@ contract SalesRounds is Ownable {
     require(wallet != address(0), "invalid address");
     require(roundIndex < Rounds.length, "invalid round index");
     Rounds[roundIndex].invests[wallet] = weiAmount;
+  }
+
+  function increaseRoundInvestOf(address wallet, uint256 weiAmount, uint8 roundIndex) internal {
+    require(wallet != address(0), "invalid address");
+    require(roundIndex < Rounds.length, "invalid round index");
+    Rounds[roundIndex].invests[wallet] = Rounds[roundIndex].invests[wallet].add(weiAmount);
   }
 
   function _addRound(
