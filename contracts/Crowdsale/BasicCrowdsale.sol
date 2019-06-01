@@ -32,7 +32,18 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
       _maxIndividualEtherInvest = maxIndividualEtherInvest;
   }
 
-  function buyToken() public payable {}
+  function buyToken() public payable onlySalesRunning {
+    address wallet = msg.sender;
+    uint256 weiAmount = msg.value;
+
+    _preValidatePurchase(wallet, weiAmount);
+
+    _updatePurchaseState(wallet, weiAmount);
+
+    uint256 tokenAmount = _processPurchase(wallet, weiAmount);
+
+    emit TokensPurchased(wallet, weiAmount, tokenAmount);
+  }
 
   function _preValidatePurchase(address wallet, uint256 weiAmount) internal view returns (bool) {
     require(wallet != address(0), "invalid wallet address");
