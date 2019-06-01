@@ -1,6 +1,6 @@
 pragma solidity ^0.5.2;
 
-import "../Roles.sol";
+import "openzeppelin-solidity/contracts/access/Roles.sol";
 
 contract ProjectOwnerRole {
   using Roles for Roles.Role;
