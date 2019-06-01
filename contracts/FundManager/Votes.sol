@@ -3,11 +3,11 @@ pragma solidity ^0.5.2;
 import "./ProjectOwnerRole.sol";
 import "./WhitelistedOracles.sol";
 
-contract Votes is ProjectOwnerRole, WhitelistedOracles {
+contract Voting is ProjectOwnerRole, WhitelistedOracles {
   enum ElectionType {Funding, CloseProject}
   enum ElectionState {Voting, Accepted, Denied}
 
-  struct VoteSession {
+  struct VotingSession {
     ElectionType electioType;
     ElectionState state;
     address createdBy;
