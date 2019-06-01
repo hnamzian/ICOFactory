@@ -10,4 +10,9 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
   uint256 private _softcap;
   uint256 private _hardcap;
 
+  uint256 private _maxIndividualEtherInvest;
+
+  mapping (address => uint256) private _invests;
+
+  uint256 private _etherRaised;
 }
