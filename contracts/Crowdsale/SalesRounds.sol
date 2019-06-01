@@ -91,6 +91,12 @@ contract SalesRounds is Ownable {
     return Rounds[roundIndex].invests[wallet];
   }
 
+  function setRoundInvestOf(address wallet, uint256 weiAmount, uint8 roundIndex) internal {
+    require(wallet != address(0), "invalid address");
+    require(roundIndex < Rounds.length, "invalid round index");
+    Rounds[roundIndex].invests[wallet] = weiAmount;
+  }
+
   function _addRound(
     uint256 _opening,
     uint256 _duration,
