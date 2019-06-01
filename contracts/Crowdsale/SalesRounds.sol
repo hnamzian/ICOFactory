@@ -8,8 +8,8 @@ contract SalesRounds is Ownable {
     uint256 duration;   // Round duration
     uint256 tokenPerEth;  // amount of tokens in decimals per Ether
     uint256 tokenCap;   // max number of tokens allowed to be purchased at Round
-    uint256 minTokensInvest;  // minimum amount of tokens to be purchased individually
-    uint256 maxTokensInvest;  // maximum amount of tokens can be purchased individually
+    uint256 minInvest;  // minimum amount of tokens to be purchased individually
+    uint256 maxInvest;  // maximum amount of tokens can be purchased individually
   }
   Round[] Rounds;
 
@@ -17,8 +17,8 @@ contract SalesRounds is Ownable {
   uint256 duration,
   uint256 tokenPerEth,
   uint256 tokenCap,
-  uint256 minTokensInvest,
-  uint256 maxTokensInvest);
+  uint256 minInvest,
+  uint256 maxInvest);
   event RoundRemoved(uint8 roundIndex);
 
   modifier onlySalesRunning() {
@@ -48,9 +48,9 @@ contract SalesRounds is Ownable {
     uint256 _duration,
     uint256 _tokenPerEth,
     uint256 _tokenCap,
-    uint256 _minTokensInvest,
-    uint256 _maxTokensInvest) public onlyOwner {
-    _addRound(_opening, _duration, _tokenPerEth, _tokenCap, _minTokensInvest, _maxTokensInvest);
+    uint256 _minInvest,
+    uint256 _maxInvest) public onlyOwner {
+    _addRound(_opening, _duration, _tokenPerEth, _tokenCap, _minInvest, _maxInvest);
   }
 
   function removeRound(uint8 roundIndex) public onlyOwner {
@@ -71,8 +71,8 @@ contract SalesRounds is Ownable {
     uint256 _duration,
     uint256 _tokenPerEth,
     uint256 _tokenCap,
-    uint256 _minTokensInvest,
-    uint256 _maxTokensInvest) internal {
+    uint256 _minInvest,
+    uint256 _maxInvest) internal {
     if (Rounds.length > 0) {
       Round memory lastRound = Rounds[Rounds.length-1];
       require(_opening > lastRound.opening + lastRound.duration, "invalid opening tistamp");
@@ -83,10 +83,10 @@ contract SalesRounds is Ownable {
       duration: _duration,
       tokenPerEth: _tokenPerEth,
       tokenCap: _tokenCap,
-      minTokensInvest: _minTokensInvest,
-      maxTokensInvest: _maxTokensInvest}));
+      minInvest: _minInvest,
+      maxInvest: _maxInvest}));
 
-    emit RoundAdded(_opening, _duration, _tokenPerEth, _tokenCap, _minTokensInvest, _maxTokensInvest);
+    emit RoundAdded(_opening, _duration, _tokenPerEth, _tokenCap, _minInvest, _maxInvest);
   }
 
   function _removeRound(uint8 roundIndex) internal {
