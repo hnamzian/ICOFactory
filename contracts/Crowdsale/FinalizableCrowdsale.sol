@@ -19,14 +19,14 @@ contract FinalizableCrowdsale is BasicCrowdsale {
   }
 
   function _finalize() internal {
-    if (etherRaised > hardcap) state = State.Finalized;
+    if (_etherRaised > _hardcap) state = State.Finalized;
     else if (isSalesClosed()) {
-      if (etherRaised >= softcap) state = State.Finalized;
+      if (_etherRaised >= _softcap) state = State.Finalized;
       else state = State.Refunding;
     }
   }
 
   function isFinalized() public view returns (bool) {
-    return state.Finalized ? true : false;
+    return state == State.Finalized ? true : false;
   }
 }
