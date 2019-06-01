@@ -11,7 +11,7 @@ contract Votes is ProjectOwnerRole, WhitelistedOracles {
     ElectionType electioType;
     ElectionState state;
     address createdBy;
-    mapping (address => bool) votes;
+    mapping (address => bool) voteOf;
     uint8 positiveVotes;
   }
   
