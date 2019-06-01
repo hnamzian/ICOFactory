@@ -22,9 +22,11 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
   event TokensPurchased(address indexed wallet, uint256 weiAmount, uint256 tokens);
 
   constructor(
+    address tokenAddress,
     uint256 softcap, 
     uint256 hardcap, 
     uint256 maxIndividualEtherInvest) public {
+      _token = GERC20(tokenAddress);
       _softcap = softcap;
       _hardcap = hardcap;
       _maxIndividualEtherInvest = maxIndividualEtherInvest;
