@@ -14,6 +14,13 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     mapping (address => bool) voteOf;
     uint8 positiveVotes;
   }
-  VotingSession[] votingSessions;
+
+  struct FundVotingSession {
+    VotingSession votingSession;
+    uint256 requestedFund;
+    string message;
+  }
+
+  FundVotingSession[] fundVotingSessions;
   
 }
