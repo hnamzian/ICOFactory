@@ -43,4 +43,13 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
 
     return true;
   }
+
+  function _updatePurchaseState(address wallet, uint256 weiAmount) internal returns (bool) {
+    _etherRaised = _etherRaised.add(weiAmount);
+    _invests[wallet] = _invests[wallet].add(weiAmount);
+
+    uint8 roundIndex = _getRoundIndex();
+    increaseRoundInvestOf(wallet, weiAmount, roundIndex);
+  }
+
 }
