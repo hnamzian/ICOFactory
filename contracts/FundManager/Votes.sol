@@ -21,6 +21,13 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     string message;
   }
 
+  struct CloseProjectVotingSession {
+    VotingSession votingSession;
+    string message;
+  }
+
   FundVotingSession[] fundVotingSessions;
+  CloseProjectVotingSession[] closeProjectVotingSessions;
+
   
 }
