@@ -8,8 +8,9 @@ contract SalesRounds is Ownable {
     uint256 duration;   // Round duration
     uint256 tokenPerEth;  // amount of tokens in decimals per Ether
     uint256 tokenCap;   // max number of tokens allowed to be purchased at Round
-    uint256 minInvest;  // minimum amount of tokens to be purchased individually
-    uint256 maxInvest;  // maximum amount of tokens can be purchased individually
+    uint256 minInvest;  // minimum amount of weis to be purchased individually
+    uint256 maxInvest;  // maximum amount of weis can be purchased individually
+    mapping(address => uint256) invests;  // amount of weis invested by an address at each Round
   }
   Round[] Rounds;
 
