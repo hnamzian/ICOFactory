@@ -15,19 +15,19 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     uint8 positiveVotes;
   }
 
-  struct FundVotingSession {
+  struct FundVoting {
     VotingSession votingSession;
     uint256 requestedFund;
     string message;
   }
 
-  struct CloseProjectVotingSession {
+  struct CloseProjectVoting {
     VotingSession votingSession;
     string message;
   }
 
-  FundVotingSession[] fundVotingSessions;
-  CloseProjectVotingSession[] closeProjectVotingSessions;
+  FundVoting[] fundVoting;
+  CloseProjectVoting[] closeProjectVoting;
 
   
 }
