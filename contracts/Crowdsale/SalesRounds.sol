@@ -76,6 +76,15 @@ contract SalesRounds is Ownable {
     return uint(-1);
   }
 
+  function getRoundMaxInvest() public view returns (uint256) {
+    uint8 roundIndex = _getRoundIndex();
+    if (roundIndex < Rounds.length) {
+      Round memory round = Rounds[roundIndex];
+      return round.maxInvest;
+    }
+    return uint(0);
+  }
+
   function _addRound(
     uint256 _opening,
     uint256 _duration,
