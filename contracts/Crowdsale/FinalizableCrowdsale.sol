@@ -21,4 +21,8 @@ contract FinalizableCrowdsale is BasicCrowdsale {
       else state = State.Refunding;
     }
   }
+
+  function isFinalized() public view returns (bool) {
+    return state.Finalized ? true : false;
+  }
 }
