@@ -16,7 +16,7 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
 
   uint256 private _maxIndividualEtherInvest;
 
-  mapping (address => uint256) private _invests;
+  mapping (address => uint256) internal _invests;
 
 
   event TokensPurchased(address indexed wallet, uint256 weiAmount, uint256 tokens);
