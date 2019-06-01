@@ -109,6 +109,6 @@ contract SalesRounds is Ownable {
         return i;
       }
     }
-    return uitn8(-1);
+    return uint8(-1);
   }
 }
