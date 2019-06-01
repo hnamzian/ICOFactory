@@ -39,7 +39,8 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
     uint8 roundIndex = _getRoundIndex();
     uint256 roundInvest = getRoundInvestOf(wallet, roundIndex).add(weiAmount);
     require(roundInvest <= getRoundMaxInvest(), "individual round invest cap reached");
-    
+    require(roundInvest >= getRoundMinInvest(), "individual round invest not sufficiant");
+
     return true;
   }
 }
