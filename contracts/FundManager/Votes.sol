@@ -27,4 +27,21 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   FundVoting[] fundVoting;
   CloseProjectVoting[] closeProjectVoting;
 
+  function requestFundVoting(uint256 fund, string memory message) public onlyProjectOwner {
+    FundVoting memory lastFundVoting = fundVoting[fundVoting.length-1];
+    require(lastFundVoting.votingSession.state != VotingState.Voting, "another voting session is still running");
+    require(fund > 0, "requested fund must be grater than 0");
+
+    FundVoting memory _fundVoting = FundVoting({
+      votingSession: VotingSession({
+        state: VotingState.Voting,
+        createdBy: msg.sender,
+        positiveVotes: 0
+      }),
+      requestedFund: fund,
+      message: message
+    });
+
+    fundVoting.push(_fundVoting);
+  }
 }
