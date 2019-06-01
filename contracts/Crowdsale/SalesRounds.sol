@@ -101,7 +101,7 @@ contract SalesRounds is Ownable {
     emit RoundRemoved(roundIndex);
   }
 
-  function _getRoundIndex() internal returns (uint8) {
+  function _getRoundIndex() internal view returns (uint8) {
     Round memory round;
     for (uint8 i = 0; i < Rounds.length; i++) {
       round = Rounds[i];
