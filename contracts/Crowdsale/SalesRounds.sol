@@ -61,7 +61,7 @@ contract SalesRounds is Ownable {
     uint8 roundIndex = _getRoundIndex();
     if (roundIndex < Rounds.length) {
       Round memory round = Rounds[roundIndex];
-      return round.tokensPerEth;
+      return round.tokenPerEth;
     }
     return 0;
   }
