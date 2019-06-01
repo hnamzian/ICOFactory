@@ -7,4 +7,7 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
   using SafeMath for uint256;
 
+  uint256 private _softcap;
+  uint256 private _hardcap;
+
 }
