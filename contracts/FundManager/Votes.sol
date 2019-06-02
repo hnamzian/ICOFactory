@@ -81,4 +81,12 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     }
   }
 
+  function voteCloseProject(bool _vote) public onlyOracle onlyCloseProjectVotingRunning {
+    CloseProjectVoting _lastVoting = closeProjectVoting[closeProjectVoting.length-1];
+    if(_lastVoting.votingSession.voteOf[msg.sender] != _vote) {
+      _lastVoting.votingSession.voteOf[msg.sender] = _vote;
+      if(_vote) _lastVoting.votingSession.positiveVotes.add(1);
+    }
+  }
+
 }
