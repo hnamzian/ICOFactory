@@ -9,6 +9,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   struct VotingSession {
     VotingState state;
     address createdBy;
+    uint256 ending;
     mapping (address => bool) voteOf;
     uint8 positiveVotes;
   }
