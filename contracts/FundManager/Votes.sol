@@ -97,9 +97,9 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     }
   }
 
-  function _voteConsensus(uint8 positiveVotes) internal returns (bool) {
-    if (positiveVotes >= _minVotes) return true;
-    return false;
+  function _voteConsensus(uint8 positiveVotes) internal returns (VotingState) {
+    if (positiveVotes >= _minVotes) return VotingState.Accepted;
+    return VotingState.Denied;
   }
 
 }
