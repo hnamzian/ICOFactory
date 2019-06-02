@@ -30,13 +30,13 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
 
   modifier onlyFundVotingRunning() {
     FundVoting _lastVoting = fundVoting[fundVoting.length-1];
-    require(_lastVoting.votingSession.state == VotingState.Voting, "no active voting");
+    require(block.timestamp < _lastVoting.votingSession.ending, "no active voting");
     _;
   }
 
   modifier onlyCloseProjectVotingRunning() {
     CloseProjectVoting _lastVoting = closeProjectVoting[fundVoting.length-1];
-    require(_lastVoting.votingSession.state == VotingState.Voting, "no active voting");
+    require(block.timestamp < _lastVoting.votingSession.ending, "no active voting");
     _;
   }
   
