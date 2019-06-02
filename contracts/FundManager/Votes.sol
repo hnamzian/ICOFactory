@@ -4,7 +4,7 @@ import "./ProjectOwnerRole.sol";
 import "./WhitelistedOracles.sol";
 
 contract Voting is ProjectOwnerRole, WhitelistedOracles {
-  enum VotingState {Voting, Accepted, Denied}
+  enum VotingState {Accepted, Denied}
 
   struct VotingSession {
     VotingState state;
