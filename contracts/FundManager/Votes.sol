@@ -86,6 +86,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     if(_lastVoting.voteOf[msg.sender] != _vote) {
       _lastVoting.voteOf[msg.sender] = _vote;
       if(_vote) _lastVoting.positiveVotes.add(1);
+      _lastVoting.state = _voteConsensus(_lastVoting.positiveVotes);
     }
   }
 
@@ -94,6 +95,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     if(_lastVoting.voteOf[msg.sender] != _vote) {
       _lastVoting.voteOf[msg.sender] = _vote;
       if(_vote) _lastVoting.positiveVotes.add(1);
+      _lastVoting.state = _voteConsensus(_lastVoting.positiveVotes);
     }
   }
 
