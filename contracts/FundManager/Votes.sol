@@ -42,7 +42,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   
   function requestFundVoting(uint256 fund, uint256 ending, string memory message) public onlyProjectOwner {
     FundVoting memory lastFundVoting = fundVoting[fundVoting.length-1];
-    require(lastFundVoting.votingSession.state != VotingState.Voting, "another voting session is still running");
+    require(block.timestamp > lastFundVoting.votingSession.ending, "another voting session is still running");
     require(fund > 0, "requested fund must be grater than 0");
 
     FundVoting memory _fundVoting = FundVoting({
@@ -61,7 +61,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
 
   function requestCloseProjectVoting(uint256 ending, string memory message) public onlyOracle {
     CloseProjectVoting memory lastVoting = closeProjectVoting[closeProjectVoting.length-1];
-    require(lastVoting.votingSession.state != VotingState.Voting, "another voting session is still running");
+    require(block.timestamp > lastVoting.votingSession.ending, "another voting session is still running");
 
     CloseProjectVoting memory _closeProjectVoting = CloseProjectVoting({
       votingSession: VotingSession({
