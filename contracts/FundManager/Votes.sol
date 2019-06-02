@@ -47,7 +47,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
 
     FundVoting memory _fundVoting = FundVoting({
       votingSession: VotingSession({
-        state: VotingState.Voting,
+        state: VotingState.Denied,
         ending: ending,
         createdBy: msg.sender,
         positiveVotes: 0
@@ -65,7 +65,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
 
     CloseProjectVoting memory _closeProjectVoting = CloseProjectVoting({
       votingSession: VotingSession({
-        state: VotingState.Voting,
+        state: VotingState.Denied,
         ending: ending,
         createdBy: msg.sender,
         positiveVotes: 0
