@@ -6,7 +6,7 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract Voting is ProjectOwnerRole, WhitelistedOracles {
   using SafeMath for uint8;
-  
+
   enum VotingState {Accepted, Denied}
 
   struct VotingSession {
@@ -32,13 +32,13 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   CloseProjectVoting[] closeProjectVoting;
 
   modifier onlyFundVotingRunning() {
-    FundVoting _lastVoting = fundVoting[fundVoting.length-1];
+    FundVoting memory _lastVoting = fundVoting[fundVoting.length-1];
     require(block.timestamp < _lastVoting.votingSession.ending, "no active voting");
     _;
   }
 
   modifier onlyCloseProjectVotingRunning() {
-    CloseProjectVoting _lastVoting = closeProjectVoting[fundVoting.length-1];
+    CloseProjectVoting memory _lastVoting = closeProjectVoting[fundVoting.length-1];
     require(block.timestamp < _lastVoting.votingSession.ending, "no active voting");
     _;
   }
