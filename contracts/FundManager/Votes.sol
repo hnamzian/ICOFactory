@@ -80,7 +80,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   }
 
   function voteFundRaising(bool _vote) public onlyOracle onlyFundVotingRunning {
-    FundVoting _lastVoting = fundVoting[fundVoting.length-1];
+    FundVoting storage _lastVoting = fundVoting[fundVoting.length-1];
     if(_lastVoting.votingSession.voteOf[msg.sender] != _vote) {
       _lastVoting.votingSession.voteOf[msg.sender] = _vote;
       if(_vote) _lastVoting.votingSession.positiveVotes.add(1);
@@ -88,7 +88,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   }
 
   function voteCloseProject(bool _vote) public onlyOracle onlyCloseProjectVotingRunning {
-    CloseProjectVoting _lastVoting = closeProjectVoting[closeProjectVoting.length-1];
+    CloseProjectVoting storage _lastVoting = closeProjectVoting[closeProjectVoting.length-1];
     if(_lastVoting.votingSession.voteOf[msg.sender] != _vote) {
       _lastVoting.votingSession.voteOf[msg.sender] = _vote;
       if(_vote) _lastVoting.votingSession.positiveVotes.add(1);
