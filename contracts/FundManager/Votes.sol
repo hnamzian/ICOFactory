@@ -31,6 +31,8 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   FundVoting[] fundVoting;
   CloseProjectVoting[] closeProjectVoting;
 
+  uint8 private _minVotes;
+
   modifier onlyFundVotingRunning() {
     FundVoting memory _lastVoting = fundVoting[fundVoting.length-1];
     require(block.timestamp < _lastVoting.votingSession.ending, "no active voting");
@@ -93,6 +95,11 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
       _lastVoting.votingSession.voteOf[msg.sender] = _vote;
       if(_vote) _lastVoting.votingSession.positiveVotes.add(1);
     }
+  }
+
+  function _voteConsensus(uint8 positiveVotes) internal returns (bool) {
+    if (positiveVotes >= _minVotes) return true;
+    return false;
   }
 
 }
