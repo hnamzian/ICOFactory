@@ -11,6 +11,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
 
   struct VotingSession {
     VotingState state;
+    bool finalized;
     address createdBy;
     uint256 ending;
     mapping (address => bool) voteOf;
@@ -53,6 +54,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     FundVoting memory _fundVoting = FundVoting({
       votingSession: VotingSession({
         state: VotingState.Denied,
+        finalized: false,
         ending: ending,
         createdBy: msg.sender,
         positiveVotes: 0
@@ -71,6 +73,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     CloseProjectVoting memory _closeProjectVoting = CloseProjectVoting({
       votingSession: VotingSession({
         state: VotingState.Denied,
+        finalized: false,
         ending: ending,
         createdBy: msg.sender,
         positiveVotes: 0
