@@ -108,7 +108,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   function claimFund(uint8 votingIndex) public onlyProjectOwner returns (uint256) {
     FundVoting storage _lastVoting = fundVoting[votingIndex];
     require(!_lastVoting.votingSession.finalized, "voting session has been finalized");
-    return _lastVoting.requestedFund;
+    Crowdsale.withdraw(_lastVoting.requestedFund);
   }
 
   function _voteConsensus(uint8 positiveVotes) internal view returns (VotingState) {
