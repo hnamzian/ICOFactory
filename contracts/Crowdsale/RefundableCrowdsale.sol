@@ -1,9 +1,8 @@
 pragma solidity "0.5.2";
 
 import "./FinalizableCrowdsale.sol";
-import "./WithdrawalCrowdsale.sol";
 
-contract RefundableCrowdsale is FinalizableCrowdsale, WithdrawalCrowdsale {
+contract RefundableCrowdsale is FinalizableCrowdsale {
   event Refunded(address investor, uint256 invest);
     
   function refund(address payable investor) public {
