@@ -111,6 +111,13 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     Crowdsale.withdraw(_lastVoting.requestedFund);
   }
 
+  function terminateProject() public onlyOracle {
+    CloseProjectVoting memory _lastVoting = closeProjectVoting[fundVoting.length-1];
+    require(block.timestamp > _lastVoting.votingSession.ending, "voting is not closed");
+    
+    if(_lastVoting.votingSession.state == VotingState.Accepted) Crowdsale.terminateProject();
+  }
+
   function _voteConsensus(uint8 positiveVotes) internal view returns (VotingState) {
     if (positiveVotes >= _minVotes) return VotingState.Accepted;
     return VotingState.Denied;
