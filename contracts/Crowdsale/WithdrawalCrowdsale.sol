@@ -41,4 +41,9 @@ contract WithdrawalCrowdsale is BasicCrowdsale {
     return true;
   }
   
+  function _updatePurchaseState(address wallet, uint256 weiAmount) internal returns (bool) {
+    _remainingFunds.add(weiAmount);
+    super._updatePurchaseState(wallet, weiAmount);
+  }
+
 }
