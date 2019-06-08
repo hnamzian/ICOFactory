@@ -5,8 +5,9 @@ import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 
 contract WithdrawalCrowdsale is BasicCrowdsale, Ownable {
   address private _withdrawManager;
-
   address private _withdrawalAddress;
+
+  event FundWithdrawn(address _withdrawalAddress, uint256 _fund);
 
   modifier onlyWithdrawManger() {
     require(msg.sender == _withdrawManager, "you are not permitted");
@@ -21,5 +22,11 @@ contract WithdrawalCrowdsale is BasicCrowdsale, Ownable {
     _withdrawalAddress = withdrawalAddress;
   }
 
+  function withdraw(uint256 fund) public onlyWithdrawManager returns (bool) {
+    require(_withdrawalAddress != address(0), "Invalid withdrawal Address");
+    _withdrawalAddress.transfer(fund);
+    FundWithdrawn(_withdrawalAddress, fund);
+    return true;
+  }
   
 }
