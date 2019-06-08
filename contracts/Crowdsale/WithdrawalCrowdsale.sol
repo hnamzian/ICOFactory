@@ -1,11 +1,10 @@
 pragma solidity "0.5.2";
 
 import "./BasicCrowdsale.sol";
-import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract WithdrawalCrowdsale is BasicCrowdsale, Ownable {
-  using Safemath for uint256;
+contract WithdrawalCrowdsale is BasicCrowdsale {
+  using SafeMath for uint256;
 
   address private _withdrawManager;
   address private _withdrawalAddress;
@@ -15,7 +14,7 @@ contract WithdrawalCrowdsale is BasicCrowdsale, Ownable {
 
   event FundWithdrawn(address _withdrawalAddress, uint256 _fund);
 
-  modifier onlyWithdrawManger() {
+  modifier onlyWithdrawManager() {
     require(msg.sender == _withdrawManager, "you are not permitted");
     _;
   }
