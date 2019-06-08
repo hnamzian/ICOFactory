@@ -36,7 +36,7 @@ contract WithdrawalCrowdsale is BasicCrowdsale {
 
     _withdrawalAddress.transfer(fund);
     
-    FundWithdrawn(_withdrawalAddress, fund);
+    emit FundWithdrawn(_withdrawalAddress, fund);
 
     return true;
   }
