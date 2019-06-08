@@ -1,17 +1,22 @@
 pragma solidity "0.5.2";
 
 import "./BasicCrowdsale.sol";
+import "./TerminatorRole.sol";
 
-contract FinalizableCrowdsale is BasicCrowdsale {
+contract FinalizableCrowdsale is BasicCrowdsale, TerminatorRole {
   // defines Crowdsale state:
   // Running: open to purchase
   // Refunding: closed and invests must be refunded
   // Finalized: closed and fund raised successfully 
-  enum State {Running, Refunding, Finalized}
+  enum State {Running, Refunding, Terminated, Finalized}
   State internal state;
 
   constructor() public {
     state = State.Running;
+  }
+
+  function terminateProject() public onlyTerminator {
+    if (state == State.Finalized) state = State.Terminated;
   }
   
   function finalize() public onlyOwner {
