@@ -7,7 +7,7 @@ contract WithdrawalCrowdsale is BasicCrowdsale {
   using SafeMath for uint256;
 
   address private _withdrawManager;
-  address private _withdrawalAddress;
+  address payable _withdrawalAddress;
 
   uint256 private _totalWithdrawals;
   uint256 private _remainingFunds;
@@ -23,7 +23,7 @@ contract WithdrawalCrowdsale is BasicCrowdsale {
     _withdrawManager = withdrawManager;
   }
 
-  function setWithdrawalAddress(address withdrawalAddress) public onlyOwner {
+  function setWithdrawalAddress(address payable withdrawalAddress) public onlyOwner {
     _withdrawalAddress = withdrawalAddress;
   }
 
