@@ -2,10 +2,13 @@ pragma solidity ^0.5.2;
 
 import "./ProjectOwnerRole.sol";
 import "./WhitelistedOracles.sol";
+import "../Crowdsale/GeneralCrowdsale.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract Voting is ProjectOwnerRole, WhitelistedOracles {
   using SafeMath for uint8;
+
+  GeneralCrowdsale Crowdsale;
 
   enum VotingState {Accepted, Denied}
 
