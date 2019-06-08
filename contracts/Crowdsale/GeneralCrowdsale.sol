@@ -11,5 +11,11 @@ contract GeneralCrowdsale is
   FinalizableCrowdsale,
   RefundableCrowdsale
 {
+  constructor(address tokenAddress,
+    uint256 softcap,
+    uint256 hardcap,
+    uint256 maxIndividualEtherInvest)
+  BasicCrowdsale(tokenAddress, softcap, hardcap, maxIndividualEtherInvest)
+  FinalizableCrowdsale() public {}
 
 }
