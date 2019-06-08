@@ -2,8 +2,11 @@ pragma solidity "0.5.2";
 
 import "./BasicCrowdsale.sol";
 import "openzeppelin-solidity/contracts/ownership/Ownable.sol";
+import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract WithdrawalCrowdsale is BasicCrowdsale, Ownable {
+  using Safemath for uint256;
+  
   address private _withdrawManager;
   address private _withdrawalAddress;
 
