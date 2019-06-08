@@ -6,7 +6,7 @@ import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract WithdrawalCrowdsale is BasicCrowdsale, Ownable {
   using Safemath for uint256;
-  
+
   address private _withdrawManager;
   address private _withdrawalAddress;
 
@@ -30,6 +30,11 @@ contract WithdrawalCrowdsale is BasicCrowdsale, Ownable {
 
   function withdraw(uint256 fund) public onlyWithdrawManager returns (bool) {
     require(_withdrawalAddress != address(0), "Invalid withdrawal Address");
+    require(fund < _remainingFunds, "Insufficient Funds");
+
+    _totalWithdrawals.add(fund);
+    _remainingFunds.sub(fund);
+
     _withdrawalAddress.transfer(fund);
     
     FundWithdrawn(_withdrawalAddress, fund);
