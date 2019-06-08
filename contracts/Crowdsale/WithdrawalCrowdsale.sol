@@ -9,8 +9,7 @@ contract WithdrawalCrowdsale is BasicCrowdsale {
   address private _withdrawManager;
   address payable _withdrawalAddress;
 
-  uint256 private _totalWithdrawals;
-  uint256 private _remainingFunds;
+  uint256 internal _totalWithdrawals;
 
   event FundWithdrawn(address _withdrawalAddress, uint256 _fund);
 
@@ -29,21 +28,15 @@ contract WithdrawalCrowdsale is BasicCrowdsale {
 
   function withdraw(uint256 fund) public onlyWithdrawManager returns (bool) {
     require(_withdrawalAddress != address(0), "Invalid withdrawal Address");
-    require(fund < _remainingFunds, "Insufficient Funds");
+    require(fund < _etherRaised.sub(_remainingFunds), "Insufficient Funds");
 
     _totalWithdrawals.add(fund);
-    _remainingFunds.sub(fund);
 
     _withdrawalAddress.transfer(fund);
     
     emit FundWithdrawn(_withdrawalAddress, fund);
 
     return true;
-  }
-  
-  function _updatePurchaseState(address wallet, uint256 weiAmount) internal returns (bool) {
-    _remainingFunds.add(weiAmount);
-    super._updatePurchaseState(wallet, weiAmount);
   }
 
 }
