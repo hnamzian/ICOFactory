@@ -10,7 +10,7 @@ contract RefundableCrowdsale is FinalizableCrowdsale, WithdrawalCrowdsale {
     require(state == State.Refunding  || state == State.Terminated);
     require(_invests[investor] != 0);
 
-    uint256 refundValue =  _etherRaised.sub(_totalWithdrawals).mul(_invests[investor]).div(_etherRaised);
+    uint256 refundValue = _etherRaised.sub(_totalWithdrawals).mul(_invests[investor]).div(_etherRaised);
     _invests[investor] = 0;
     investor.transfer(refundValue);
     
