@@ -9,8 +9,6 @@ contract WithdrawalCrowdsale is BasicCrowdsale {
   address private _withdrawManager;
   address payable _withdrawalAddress;
 
-  uint256 internal _totalWithdrawals;
-
   event FundWithdrawn(address _withdrawalAddress, uint256 _fund);
 
   modifier onlyWithdrawManager() {
