@@ -26,6 +26,7 @@ contract TokenLauncher {
 
     emit TokenLaunched(address(gerc20), name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
 
+    return gerc20;
   }
 
 }
