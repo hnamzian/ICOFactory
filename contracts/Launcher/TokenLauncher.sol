@@ -21,7 +21,7 @@ contract TokenLauncher {
     bool isBurnable,
     bool isPausable,
     bool isCapped,
-    uint256 cap) public {
+    uint256 cap) public returns (GERC20) {
     GERC20 gerc20 = new GERC20(name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
 
     emit TokenLaunched(address(gerc20), name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
