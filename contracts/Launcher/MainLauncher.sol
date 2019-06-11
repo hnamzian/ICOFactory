@@ -21,11 +21,12 @@ contract MainLauncher {
     address tokenAddress,
     uint256 softcap,
     uint256 hardcap,
-    uint256 maxIndividualEtherInvest
+    uint256 maxIndividualEtherInvest,
+    address crowdsaleAddress
   ) public {
     tokenLauncher.launchToken(name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
     crowdsaleLauncher.launchCrowdsale(tokenAddress, softcap, hardcap, maxIndividualEtherInvest);
-    votingLauncher.launchVoting();
+    votingLauncher.launchVoting(crowdsaleAddress);
   }
 
 }
