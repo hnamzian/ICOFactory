@@ -37,6 +37,10 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
 
   uint8 private _minVotes;
 
+  constructor(address crowdsaleAddress) public {
+    Crowdsale = GeneralCrowdsale(crowdsaleAddress);
+  }
+
   modifier onlyFundVotingRunning() {
     FundVoting memory _lastVoting = fundVoting[fundVoting.length-1];
     require(block.timestamp < _lastVoting.votingSession.ending, "no active voting");
