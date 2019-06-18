@@ -5,11 +5,11 @@ import "../FundManager/Voting.sol";
 contract VotingLauncher {
   event VotingLaunched(address votingAddress);
 
-  function launchVoting(address crowdsaleAddress) public returns (Voting) {
+  function launchVoting(address crowdsaleAddress) public returns (address) {
     Voting voting = new Voting(crowdsaleAddress);
 
     emit VotingLaunched(address(voting));
 
-    return voting;
+    return address(voting);
   }
 }
