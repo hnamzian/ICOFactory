@@ -24,9 +24,12 @@ contract STOSheet {
   }
 
   struct STO {
+    address createdBy;
     Token token;
     Crowdsale crowdsale;
     Voting voting;
   }
+
+  STO[] STOs;
 
 }
