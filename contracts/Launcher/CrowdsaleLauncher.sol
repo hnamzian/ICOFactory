@@ -14,11 +14,11 @@ contract CrowdsaleLauncher {
     address tokenAddress,
     uint256 softcap,
     uint256 hardcap,
-    uint256 maxIndividualEtherInvest) public returns (GeneralCrowdsale) {
+    uint256 maxIndividualEtherInvest) public returns (address) {
     GeneralCrowdsale crowdsale = new GeneralCrowdsale(tokenAddress, softcap, hardcap, maxIndividualEtherInvest);
 
     emit CrowdsaleLaunched(address(crowdsale), tokenAddress, softcap, hardcap, maxIndividualEtherInvest);
 
-    return crowdsale;
+    return address(crowdsale);
   }
 }
