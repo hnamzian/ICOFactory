@@ -1,6 +1,10 @@
 pragma solidity ^0.5.2;
 
+import "../utils/bytesUtil.sol";
+
 contract STOSheet {
+  using bytesUtils for bytes32;
+
   struct Token {
     string name;
     string symbol;
@@ -42,8 +46,8 @@ contract STOSheet {
     uint256 cap,
     uint256 softcap,
     uint256 hardcap,
-    uint256 maxIndividualEtherInvest) public returns (bytes32 hashID) {
-    hashID = keccak256(
+    uint256 maxIndividualEtherInvest) public returns (string memory hashIDString) {
+    bytes32 hashID = keccak256(
       abi.encode(
       name,
       symbol,
@@ -55,6 +59,10 @@ contract STOSheet {
       softcap,
       hardcap,
       maxIndividualEtherInvest));
+      
+    hashIDString = hashID.bytes32ToString();
+
+    // STO storage stoConfig = STOs[hashID.bytes32ToString()];
   }
 
 }
