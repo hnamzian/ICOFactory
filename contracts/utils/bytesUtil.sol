@@ -8,4 +8,9 @@ library bytesUtils {
     }
     return bytesArray;
   }
+
+  function bytes32ToString(bytes32 _bytes32) public view returns (string memory) {
+    bytes memory bytesArray = bytes32ToBytes(_bytes32);
+    return string(bytesArray);
+  }
 }
