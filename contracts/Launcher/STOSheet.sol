@@ -4,7 +4,7 @@ import "../utils/strutil.sol";
 
 contract STOSheet {
   using strutil for string;
-  
+
   struct Token {
     string name;
     string symbol;
@@ -46,10 +46,19 @@ contract STOSheet {
     uint256 cap,
     uint256 softcap,
     uint256 hardcap,
-    uint256 maxIndividualEtherInvest) public returns (string memory id) {
-    id = keccak256(block.timestamp, msg.sender);
-
-
+    uint256 maxIndividualEtherInvest) public returns (bytes32 hashID) {
+    hashID = keccak256(
+      abi.encode(
+      name,
+      symbol,
+      decimals,
+      isBurnable,
+      isPausable,
+      isCapped,
+      cap,
+      softcap,
+      hardcap,
+      maxIndividualEtherInvest));
   }
 
 }
