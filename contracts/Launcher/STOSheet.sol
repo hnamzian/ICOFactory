@@ -1,10 +1,6 @@
 pragma solidity ^0.5.2;
 
-import "../utils/strutil.sol";
-
 contract STOSheet {
-  using strutil for string;
-
   struct Token {
     string name;
     string symbol;
