@@ -21,12 +21,12 @@ contract TokenLauncher {
     bool isBurnable,
     bool isPausable,
     bool isCapped,
-    uint256 cap) public returns (GERC20) {
+    uint256 cap) public returns (address) {
     GERC20 gerc20 = new GERC20(name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
 
     emit TokenLaunched(address(gerc20), name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
 
-    return gerc20;
+    return address(gerc20);
   }
 
 }
