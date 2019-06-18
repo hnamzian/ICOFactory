@@ -30,6 +30,6 @@ contract STOSheet {
     Voting voting;
   }
 
-  STO[] STOs;
+  mapping(string => STO) private STOs;
 
 }
