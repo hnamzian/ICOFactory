@@ -1,6 +1,7 @@
 pragma solidity ^0.5.2;
 
 import "../Crowdsale/GeneralCrowdsale.sol";
+import "./STOSheet.sol";
 
 contract CrowdsaleLauncher {
   STOSheet _STOSheet;
@@ -17,10 +18,9 @@ contract CrowdsaleLauncher {
   }
   
   function launchCrowdsale(string memory stoID) public returns (address) {
-    (address tokenAddress,
-    uint256 softcap,
+    (uint256 softcap,
     uint256 hardcap,
-    uint256 maxIndividualEtherInvest) = _STOSheet.getCrowdsaleAddress(stoID);
+    uint256 maxIndividualEtherInvest, ) = _STOSheet.getCrowdsaleConfigs(stoID);
 
     GeneralCrowdsale crowdsale = new GeneralCrowdsale(tokenAddress, softcap, hardcap, maxIndividualEtherInvest);
     address crowdsaleAddress = address(crowdsale);
