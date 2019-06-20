@@ -15,6 +15,8 @@ contract VotingLauncher {
   function launchVoting(string memory stoID) public returns (address) {
     address crowdsaleAddress = _STOSheet.getCrowdsaleAddress(stoID);
 
+    require(crowdsaleAddress != address(0), "crowdsale contract has not been deployed");
+
     Voting voting = new Voting(crowdsaleAddress);
     address votingAddress = address(voting);
 
