@@ -59,10 +59,50 @@ contract STOSheet {
       softcap,
       hardcap,
       maxIndividualEtherInvest));
-      
+
     hashIDString = hashID.bytes32ToString();
 
-    // STO storage stoConfig = STOs[hashID.bytes32ToString()];
+    STOs[hashIDString] = STO({
+      createdBy: msg.sender,
+      token: Token({
+        name: name,
+        symbol: symbol,
+        decimals: decimals,
+        isBurnable: isBurnable,
+        isPausable: isPausable,
+        isCapped: isCapped,
+        cap: cap,
+        tokenAddress: address(0)
+      }),
+      crowdsale: Crowdsale({
+        softcap: softcap,
+        hardcap: hardcap,
+        maxIndividualEtherInvest: maxIndividualEtherInvest,
+        crowdsaleAddress: address(0)
+      }),
+      voting: Voting({
+        votingAddress: address(0)
+      })
+    });
   }
 
+  function getTokenConfigs(string memory id) public view returns (
+    string memory name,
+    string memory symbol,
+    uint8 decimals,
+    bool isBurnable,
+    bool isPausable,
+    bool isCapped,
+    uint256 cap,
+    address tokenAddress) {
+    Token memory token = STOs[id].token;
+    name = token.name;
+    symbol = token.symbol;
+    decimals = token.decimals;
+    isBurnable = token.isBurnable;
+    isPausable = token.isPausable;
+    isCapped = token.isCapped;
+    cap = token.cap;
+    tokenAddress = token.tokenAddress;
+  }
 }
