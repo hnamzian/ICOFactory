@@ -117,4 +117,9 @@ contract STOSheet {
     maxIndividualEtherInvest = crowdsale.maxIndividualEtherInvest;
     crowdsaleAddress = crowdsale.crowdsaleAddress;
   }
+
+  function getVotingConfigs(string memory id) public view returns (address votingAddress) {
+    Voting memory voting = STOs[id].voting;
+    votingAddress = voting.votingAddress;
+  }
 }
