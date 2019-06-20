@@ -126,4 +126,8 @@ contract STOSheet {
     Voting memory voting = STOs[id].voting;
     votingAddress = voting.votingAddress;
   }
+
+  function getTokenAddress(string memory stoID) public view returns(address tokenAddress) {
+    tokenAddress = STOs[stoID].token.tokenAddress;
+  }
 }
