@@ -3,6 +3,8 @@ pragma solidity ^0.5.2;
 import "../Crowdsale/GeneralCrowdsale.sol";
 
 contract CrowdsaleLauncher {
+  STOSheet _STOSheet;
+
   event CrowdsaleLaunched(
   address crowdsaleAddress,
   address tokenAddress,
@@ -10,6 +12,10 @@ contract CrowdsaleLauncher {
   uint256 hardcap,
   uint256 maxIndividualEtherInvest);
 
+  constructor(address STOSheetAddress) public {
+    _STOSheet = STOSheet(STOSheetAddress);
+  }
+  
   function launchCrowdsale(
     address tokenAddress,
     uint256 softcap,
