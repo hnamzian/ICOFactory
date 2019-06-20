@@ -127,7 +127,11 @@ contract STOSheet {
     votingAddress = voting.votingAddress;
   }
 
-  function getTokenAddress(string memory stoID) public view returns(address tokenAddress) {
+  function getTokenAddress(string memory stoID) public view returns (address tokenAddress) {
     tokenAddress = STOs[stoID].token.tokenAddress;
+  }
+
+  function getCrowdsaleAddress(string memory stoID) public view returns (address crowdsaleAddress) {
+    crowdsaleAddress = STOs[stoID].crowdsale.crowdsaleAddress;
   }
 }
