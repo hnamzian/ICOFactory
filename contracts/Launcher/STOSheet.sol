@@ -94,6 +94,10 @@ contract STOSheet {
     STOs[stoID].crowdsale.crowdsaleAddress = crowdsaleAddress;
   }
 
+  function setVotingAddress(string memory stoID, address votingAddress) public {
+    STOs[stoID].voting.votingAddress = votingAddress;
+  }
+
   function getTokenConfigs(string memory id) public view returns (
     string memory name,
     string memory symbol,
