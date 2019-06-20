@@ -13,12 +13,16 @@ contract VotingLauncher {
   }
   
   function launchVoting(string memory stoID) public returns (address) {
+    (address votingAddress) = _STOSheet.getVotingConfigs(stoID);
+
+    require(votingAddress == address(0), "This project has already launched voting contract");
+
     address crowdsaleAddress = _STOSheet.getCrowdsaleAddress(stoID);
 
     require(crowdsaleAddress != address(0), "crowdsale contract has not been deployed");
 
     Voting voting = new Voting(crowdsaleAddress);
-    address votingAddress = address(voting);
+    votingAddress = address(voting);
 
     emit VotingLaunched(address(voting));
 
