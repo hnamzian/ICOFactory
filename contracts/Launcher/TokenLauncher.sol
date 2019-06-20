@@ -1,8 +1,11 @@
 pragma solidity ^0.5.2;
 
 import "../Token/GERC20.sol";
+import "./STOSheet.sol";
 
 contract TokenLauncher {
+
+  STOSheet _STOSheet;
 
   event TokenLaunched(
   address tokenAddress,
@@ -13,6 +16,10 @@ contract TokenLauncher {
   bool isPausable,
   bool isCapped,
   uint256 cap);
+
+  constructor(address STOSheetAddress) public {
+    _STOSheet = STOSheet(STOSheetAddress);
+  }
 
   function launchToken(
     string memory name,
