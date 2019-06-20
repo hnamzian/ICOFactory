@@ -90,6 +90,10 @@ contract STOSheet {
     STOs[stoID].token.tokenAddress = tokenAddress;
   }
 
+  function setCrowdsaleAddress(string memory stoID, address crowdsaleAddress) public {
+    STOs[stoID].crowdsale.crowdsaleAddress = crowdsaleAddress;
+  }
+
   function getTokenConfigs(string memory id) public view returns (
     string memory name,
     string memory symbol,
