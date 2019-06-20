@@ -16,15 +16,17 @@ contract CrowdsaleLauncher {
     _STOSheet = STOSheet(STOSheetAddress);
   }
   
-  function launchCrowdsale(
-    address tokenAddress,
+  function launchCrowdsale(string memory stoID) public returns (address) {
+    (address tokenAddress,
     uint256 softcap,
     uint256 hardcap,
-    uint256 maxIndividualEtherInvest) public returns (address) {
+    uint256 maxIndividualEtherInvest) = _STOSheet.getCrowdsaleAddress(stoID);
+
     GeneralCrowdsale crowdsale = new GeneralCrowdsale(tokenAddress, softcap, hardcap, maxIndividualEtherInvest);
+    address crowdsaleAddress = address(crowdsale);
 
     emit CrowdsaleLaunched(address(crowdsale), tokenAddress, softcap, hardcap, maxIndividualEtherInvest);
 
-    return address(crowdsale);
+    return crowdsaleAddress;
   }
 }
