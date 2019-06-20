@@ -25,6 +25,8 @@ contract CrowdsaleLauncher {
     GeneralCrowdsale crowdsale = new GeneralCrowdsale(tokenAddress, softcap, hardcap, maxIndividualEtherInvest);
     address crowdsaleAddress = address(crowdsale);
 
+    _STOSheet.setCrowdsaleAddress(stoID, crowdsaleAddress);
+
     emit CrowdsaleLaunched(address(crowdsale), tokenAddress, softcap, hardcap, maxIndividualEtherInvest);
 
     return crowdsaleAddress;
