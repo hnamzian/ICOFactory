@@ -31,6 +31,8 @@ contract TokenLauncher {
     uint256 cap,
     address tokenAddress) = _STOSheet.getTokenConfigs(stoID);
 
+    require(tokenAddress == address(0), "This project has already launched a Token");
+    
     GERC20 gerc20 = new GERC20(name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
     tokenAddress = address(gerc20);
 
