@@ -32,7 +32,7 @@ contract TokenLauncher {
     address tokenAddress) = _STOSheet.getTokenConfigs(stoID);
 
     require(tokenAddress == address(0), "This project has already launched a Token");
-    
+
     GERC20 gerc20 = new GERC20(name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
     tokenAddress = address(gerc20);
 
@@ -40,7 +40,7 @@ contract TokenLauncher {
 
     emit TokenLaunched(address(gerc20), name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
 
-    return address(gerc20);
+    return tokenAddress;
   }
 
 }
