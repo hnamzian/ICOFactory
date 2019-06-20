@@ -134,4 +134,8 @@ contract STOSheet {
   function getCrowdsaleAddress(string memory stoID) public view returns (address crowdsaleAddress) {
     crowdsaleAddress = STOs[stoID].crowdsale.crowdsaleAddress;
   }
+
+  function getVotingAddress(string memory stoID) public view returns (address votingAddress) {
+    votingAddress = STOs[stoID].voting.votingAddress;
+  }
 }
