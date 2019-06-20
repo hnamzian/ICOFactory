@@ -86,6 +86,10 @@ contract STOSheet {
     });
   }
 
+  function setTokenAddress(string memory stoID, address tokenAddress) public {
+    STOs[stoID].token.tokenAddress = tokenAddress;
+  }
+
   function getTokenConfigs(string memory id) public view returns (
     string memory name,
     string memory symbol,
