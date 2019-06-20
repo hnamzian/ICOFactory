@@ -24,6 +24,8 @@ contract CrowdsaleLauncher {
 
     address tokenAddress = _STOSheet.getTokenAddress(stoID);
 
+    require(tokenAddress != address(0), "Token conract has not been launched before");
+
     GeneralCrowdsale crowdsale = new GeneralCrowdsale(tokenAddress, softcap, hardcap, maxIndividualEtherInvest);
     address crowdsaleAddress = address(crowdsale);
 
