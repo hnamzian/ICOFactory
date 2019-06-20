@@ -20,7 +20,10 @@ contract CrowdsaleLauncher {
   function launchCrowdsale(string memory stoID) public returns (address) {
     (uint256 softcap,
     uint256 hardcap,
-    uint256 maxIndividualEtherInvest, ) = _STOSheet.getCrowdsaleConfigs(stoID);
+    uint256 maxIndividualEtherInvest,
+    address crowdsaleAddress) = _STOSheet.getCrowdsaleConfigs(stoID);
+
+    require(crowdsaleAddress == address(0), "This project has already launched crowdsale contract");
 
     address tokenAddress = _STOSheet.getTokenAddress(stoID);
 
