@@ -105,4 +105,16 @@ contract STOSheet {
     cap = token.cap;
     tokenAddress = token.tokenAddress;
   }
+
+  function getCrowdsaleConfigs(string memory id) public view returns (
+    uint256 softcap,
+    uint256 hardcap,
+    uint256 maxIndividualEtherInvest,
+    address crowdsaleAddress) {
+    Crowdsale memory crowdsale = STOs[id].crowdsale;
+    softcap = crowdsale.softcap;
+    hardcap = crowdsale.hardcap;
+    maxIndividualEtherInvest = crowdsale.maxIndividualEtherInvest;
+    crowdsaleAddress = crowdsale.crowdsaleAddress;
+  }
 }
