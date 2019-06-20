@@ -1,6 +1,7 @@
 pragma solidity ^0.5.2;
 
 import "../FundManager/Voting.sol";
+import "./STOSheet.sol";
 
 contract VotingLauncher {
   STOSheet _STOSheet;
@@ -11,11 +12,14 @@ contract VotingLauncher {
     _STOSheet = STOSheet(STOSheetAddress);
   }
   
-  function launchVoting(address crowdsaleAddress) public returns (address) {
+  function launchVoting(string memory stoID) public returns (address) {
+    address crowdsaleAddress = _STOSheet.getCrowdsaleAddress(stoID);
+
     Voting voting = new Voting(crowdsaleAddress);
+    address votingAddress = address(voting);
 
     emit VotingLaunched(address(voting));
 
-    return address(voting);
+    return votingAddress;
   }
 }
