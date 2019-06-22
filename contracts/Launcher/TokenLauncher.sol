@@ -12,7 +12,6 @@ contract TokenLauncher {
   string name,
   string symbol,
   uint8 decimals,
-  bool isBurnable,
   bool isPausable,
   bool isCapped,
   uint256 cap);
@@ -25,7 +24,6 @@ contract TokenLauncher {
     (string memory name,
     string memory symbol,
     uint8 decimals,
-    bool isBurnable,
     bool isPausable,
     bool isCapped,
     uint256 cap,
@@ -33,12 +31,12 @@ contract TokenLauncher {
 
     require(tokenAddress == address(0), "This project has already launched a Token");
 
-    GERC20 gerc20 = new GERC20(name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
+    GERC20 gerc20 = new GERC20(name, symbol, decimals, isPausable, isCapped, cap);
     tokenAddress = address(gerc20);
 
     _STOSheet.setTokenAddress(stoID, tokenAddress);
 
-    emit TokenLaunched(address(gerc20), name, symbol, decimals, isBurnable, isPausable, isCapped, cap);
+    emit TokenLaunched(address(gerc20), name, symbol, decimals, isPausable, isCapped, cap);
 
     return tokenAddress;
   }
