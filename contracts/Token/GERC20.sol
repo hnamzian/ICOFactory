@@ -14,33 +14,33 @@ contract GERC20 is ERC20,
   ERC20Pausable,
   ERC20Capped
 {
-    bool _isPausable;
-    bool _isCapped;
+  bool _isPausable;
+  bool _isCapped;
 
-    constructor(
-      string memory name,
-      string memory symbol,
-      uint8 decimals,
-      bool isPausable,
-      bool isCapped,
-      uint256 cap
-    ) ERC20Capped(cap)
-      ERC20Detailed(name, symbol, decimals) public {
-        _isPausable = isPausable;
-        _isCapped = isCapped;
-        cap = isCapped ? cap : uint256(-1);
-    }
+  constructor(
+    string memory name,
+    string memory symbol,
+    uint8 decimals,
+    bool isPausable,
+    bool isCapped,
+    uint256 cap
+  ) ERC20Capped(cap)
+    ERC20Detailed(name, symbol, decimals) public {
+    _isPausable = isPausable;
+    _isCapped = isCapped;
+    cap = isCapped ? cap : uint256(-1);
+  }
 
-    function pause() public onlyPausable {
-        super.pause();
-    }
+  function pause() public onlyPausable {
+    super.pause();
+  }
 
-    function unpause() public onlyPausable {
-        super.unpause();
-    }
+  function unpause() public onlyPausable {
+    super.unpause();
+  }
 
-    modifier onlyPausable() {
-        require(_isPausable, "Token is not Pausable");
-        _;
-    }
+  modifier onlyPausable() {
+    require(_isPausable, "Token is not Pausable");
+    _;
+  }
 }
