@@ -4,7 +4,6 @@ const tokenArgs = {
   name: "JIMMIX",
   symbol: "JMX",
   decimals: 3,
-  isBurnable: true,
   isPausable: true,
   isCapped: true,
   cap: 10000000
@@ -12,22 +11,30 @@ const tokenArgs = {
 
 contract("GERC20", accounts => {
   it("should mint token for account[1]", async () => {
-    let token = await GERC20.deployed(
+    let token = await GERC20.new(
       tokenArgs.name,
       tokenArgs.symbol,
       tokenArgs.decimals,
-      tokenArgs.isBurnable,
       tokenArgs.isPausable,
       tokenArgs.isCapped,
       tokenArgs.cap
     );
+
     await token.mint(accounts[1], 1, { from: accounts[0] });
     const balance = await token.balanceOf(accounts[1]);
     assert.equal(+balance, 1);
   });
 
   it("should transfer token", async () => {
-    let token = await GERC20.deployed();
+    let token = await GERC20.new(
+      tokenArgs.name,
+      tokenArgs.symbol,
+      tokenArgs.decimals,
+      tokenArgs.isPausable,
+      tokenArgs.isCapped,
+      tokenArgs.cap
+    );
+
     const from = accounts[1];
     const to = accounts[2];
 
@@ -44,7 +51,15 @@ contract("GERC20", accounts => {
   });
 
   it("should throw error on transferring more than owned balance", async () => {
-    let token = await GERC20.deployed();
+    let token = await GERC20.new(
+      tokenArgs.name,
+      tokenArgs.symbol,
+      tokenArgs.decimals,
+      tokenArgs.isPausable,
+      tokenArgs.isCapped,
+      tokenArgs.cap
+    );
+
     const from = accounts[1];
     const to = accounts[2];
     let revert;
@@ -60,7 +75,15 @@ contract("GERC20", accounts => {
   });
 
   it("should approve and transferFrom tokens", async () => {
-    let token = await GERC20.deployed();
+    let token = await GERC20.new(
+      tokenArgs.name,
+      tokenArgs.symbol,
+      tokenArgs.decimals,
+      tokenArgs.isPausable,
+      tokenArgs.isCapped,
+      tokenArgs.cap
+    );
+
     const minter = accounts[0];
     const from = accounts[1];
     const spender = accounts[2];
@@ -86,7 +109,15 @@ contract("GERC20", accounts => {
   });
 
   it("should throw error to spende more than allowance", async () => {
-    let token = await GERC20.deployed();
+    let token = await GERC20.new(
+      tokenArgs.name,
+      tokenArgs.symbol,
+      tokenArgs.decimals,
+      tokenArgs.isPausable,
+      tokenArgs.isCapped,
+      tokenArgs.cap
+    );
+
     const minter = accounts[0];
     const from = accounts[1];
     const spender = accounts[2];
