@@ -36,11 +36,11 @@ contract("GERC20", accounts => {
     await token.mint(accounts[1], 1, { from: accounts[0] });
 
     await token.transfer(to, 1, { from });
-    let fromFinalBalance = await token.balanceOf(from);
-    let toFinalBalance = await token.balanceOf(to);
+    let fromBalance = await token.balanceOf(from);
+    let toBalance = await token.balanceOf(to);
 
-    assert.equal(+fromFinalBalance, 0);
-    assert.equal(+toFinalBalance, 1);
+    assert.equal(+fromBalance, 0);
+    assert.equal(+toBalance, 1);
   });
 
   it("should throw error on transferring more than owned balance", async () => {
