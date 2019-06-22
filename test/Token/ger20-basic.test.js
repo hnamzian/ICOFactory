@@ -73,14 +73,12 @@ contract("GERC20", accounts => {
     const allowance = await token.allowance(from, spender);
     assert.equal(+allowance, approval);
 
-    const fromOriginBalance = await token.balanceOf(from);
-    const toOriginBalance = await token.balanceOf(to);
     await token.transferFrom(from, to, spends, { from: spender });
     const fromFinalBalance = await token.balanceOf(from);
     const toFinalBalance = await token.balanceOf(to);
 
-    assert.equal(+fromOriginBalance - +fromFinalBalance, spends);
-    assert.equal(+toFinalBalance - +toOriginBalance, spends);
+    assert.equal(+fromFinalBalance, spends);
+    assert.equal(+toFinalBalance, spends);
   });
 
   it("should throw error to spende more than allowance", async () => {
