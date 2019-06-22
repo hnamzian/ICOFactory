@@ -9,7 +9,6 @@ contract STOSheet {
     string name;
     string symbol;
     uint8 decimals;
-    bool isBurnable;
     bool isPausable;
     bool isCapped;
     uint256 cap;
@@ -40,7 +39,6 @@ contract STOSheet {
     string memory name,
     string memory symbol,
     uint8 decimals,
-    bool isBurnable,
     bool isPausable,
     bool isCapped,
     uint256 cap,
@@ -52,7 +50,6 @@ contract STOSheet {
       name,
       symbol,
       decimals,
-      isBurnable,
       isPausable,
       isCapped,
       cap,
@@ -68,7 +65,6 @@ contract STOSheet {
         name: name,
         symbol: symbol,
         decimals: decimals,
-        isBurnable: isBurnable,
         isPausable: isPausable,
         isCapped: isCapped,
         cap: cap,
@@ -102,7 +98,6 @@ contract STOSheet {
     string memory name,
     string memory symbol,
     uint8 decimals,
-    bool isBurnable,
     bool isPausable,
     bool isCapped,
     uint256 cap,
@@ -111,7 +106,6 @@ contract STOSheet {
     name = token.name;
     symbol = token.symbol;
     decimals = token.decimals;
-    isBurnable = token.isBurnable;
     isPausable = token.isPausable;
     isCapped = token.isCapped;
     cap = token.cap;
