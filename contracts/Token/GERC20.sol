@@ -14,7 +14,6 @@ contract GERC20 is ERC20,
   ERC20Pausable,
   ERC20Capped
 {
-    bool _isBurnable;
     bool _isPausable;
     bool _isCapped;
 
@@ -22,24 +21,14 @@ contract GERC20 is ERC20,
       string memory name,
       string memory symbol,
       uint8 decimals,
-      bool isBurnable,
       bool isPausable,
       bool isCapped,
       uint256 cap
     ) ERC20Capped(cap)
       ERC20Detailed(name, symbol, decimals) public {
-        _isBurnable = isBurnable;
         _isPausable = isPausable;
         _isCapped = isCapped;
         cap = isCapped ? cap : uint256(-1);
-    }
-
-    function burn(uint256 value) public onlyBurnable {
-        super.burn(value);
-    }
-
-    function burnFrom(address from, uint256 value) public onlyBurnable {
-        super.burnFrom(from, value);
     }
 
     function pause() public onlyPausable {
@@ -48,11 +37,6 @@ contract GERC20 is ERC20,
 
     function unpause() public onlyPausable {
         super.unpause();
-    }
-
-    modifier onlyBurnable() {
-        require(_isBurnable, "Token is not Buranable");
-        _;
     }
 
     modifier onlyPausable() {
