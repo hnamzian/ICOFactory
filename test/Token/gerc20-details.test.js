@@ -11,6 +11,19 @@ const tokenArgs = {
 };
 
 contract("GERC20", accounts => {
+  let token;
+  
+  beforeEach(async () => {
+    token = await GERC20.new(
+      tokenArgs.name,
+      tokenArgs.symbol,
+      tokenArgs.decimals,
+      tokenArgs.isPausable,
+      tokenArgs.isCapped,
+      tokenArgs.cap
+    );
+  });
+  
   it("should check token name", async () => {
     let token = await GERC20.deployed(
       tokenArgs.name,
