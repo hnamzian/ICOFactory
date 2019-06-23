@@ -25,8 +25,18 @@ contract("GERC20", accounts => {
 
   it("should burn tokens by token owner", async () => {
     await token.mint(accounts[1], 1, { from: accounts[0] });
-    await token.burn(1, { from: accounts[1] })
+    await token.burn(1, { from: accounts[1] });
     const balance = await token.balanceOf(accounts[1]);
     assert.equal(+balance, 0);
-  })
-})
+  });
+
+  it("should burn approved tokens by allowed account", async () => {
+    await token.mint(accounts[1], 1, { from: accounts[0] });
+    await token.approve(accounts[2], 1, { from: accounts[1] });
+    await token.burnFrom(accounts[1], 1, { from: accounts[2] });
+    const balance = await token.balanceOf(accounts[1]);
+    const allowance = await token.allowance(accounts[1], accounts[2]);
+    assert.equal(+balance, 0);
+    assert.equal(+allowance, 0);
+  });
+});
