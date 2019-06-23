@@ -52,5 +52,23 @@ contract("GERC20", accounts => {
     assert.equal(+balance, 0);
     assert.equal(+allowance, 0);
   });
+
+  it("should revert burning more than approved tokens by allowed account", async () => {
+    await token.mint(accounts[1], 1, { from: accounts[0] });
+    await token.approve(accounts[2], 1, { from: accounts[1] });
+
+    try {
+      await token.burnFrom(accounts[1], 2, { from: accounts[2] });
+    } catch (ex) {
+      revert = ex.message.includes("revert");
+    }
+    assert.equal(revert, true);
+    
+    const balance = await token.balanceOf(accounts[1]);
+    const allowance = await token.allowance(accounts[1], accounts[2]);
+
+    assert.equal(+balance, 1);
+    assert.equal(+allowance, 1);
+  });
   
 });
