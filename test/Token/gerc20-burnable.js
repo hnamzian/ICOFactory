@@ -22,4 +22,11 @@ contract("GERC20", accounts => {
       tokenArgs.cap
     );
   });
+
+  it("should burn tokens by token owner", async () => {
+    await token.mint(accounts[1], 1, { from: accounts[0] });
+    await token.burn(1, { from: accounts[1] })
+    const balance = await token.balanceOf(accounts[1]);
+    assert.equal(+balance, 0);
+  })
 })
