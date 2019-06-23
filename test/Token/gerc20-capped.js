@@ -22,4 +22,15 @@ contract("GERC20", accounts => {
       tokenArgs.cap
     );
   });
+
+  it("should revert minting tokens more than cap", async () => {
+    let revert;
+
+    try {
+      await token.mint(accounts[1], tokenArgs.cap + 1, { from: accounts[0] });
+    } catch (ex) {
+      revert = ex.message.includes("revert");
+    }
+    assert.equal(revert, true);
+  });
 });
