@@ -145,7 +145,7 @@ contract SalesRounds is Ownable {
     Round memory round;
     for (uint8 i = 0; i < Rounds.length; i++) {
       round = Rounds[i];
-      if (block.timestamp > round.opening && block.timestamp < round.opening + round.duration) {
+      if (block.timestamp >= round.opening && block.timestamp < round.opening + round.duration) {
         return i;
       }
     }
