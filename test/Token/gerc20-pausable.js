@@ -9,7 +9,7 @@ const tokenArgs = {
   cap: 10000000
 };
 
-contract("GERC20", accounts => {
+contract("GERC20 - pausable", accounts => {
   let token;
 
   beforeEach(async () => {
@@ -21,5 +21,18 @@ contract("GERC20", accounts => {
       tokenArgs.isCapped,
       tokenArgs.cap
     );
+  });
+
+  it("should revert transfering token when contract is paused", async () => {
+    let revert;
+
+    await token.mint(accounts[1], 1);
+    await token.pause({ from: accounts[0] });
+    try {
+      await token.transfer(accounts[2], 1, { from: accounts[1] });
+    } catch (ex) {
+      revert = ex.message.includes("revert");
+    }
+    assert.equal(revert, true);
   });
 });
