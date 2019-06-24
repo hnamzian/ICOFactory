@@ -24,11 +24,10 @@ contract GERC20 is ERC20,
     bool isPausable,
     bool isCapped,
     uint256 cap
-  ) ERC20Capped(cap)
+  ) ERC20Capped(isCapped ? cap : uint256(-1))
     ERC20Detailed(name, symbol, decimals) public {
     _isPausable = isPausable;
     _isCapped = isCapped;
-    cap = isCapped ? cap : uint256(-1);
   }
 
   function pause() public onlyPausable {
