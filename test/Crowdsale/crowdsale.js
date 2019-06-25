@@ -21,6 +21,21 @@ const rounds = [
   }
 ];
 
+const crowdsaleArgs = {
+  softcap: 1000,
+  hardcap: 100000,
+  maxIndividualEtherInves: 30
+};
+
+const tokenArgs = {
+  name: "JIMMIX",
+  symbol: "JMX",
+  decimals: 3,
+  isPausable: true,
+  isCapped: true,
+  cap: 10000000
+};
+
 let token;
 let crowdsale;
 
@@ -32,21 +47,6 @@ function sleep(ms) {
 
 contract("Crowdsale", accounts => {
   beforeEach(async () => {
-    const crowdsaleArgs = {
-      softcap: 1000,
-      hardcap: 100000,
-      maxIndividualEtherInves: 30
-    };
-
-    const tokenArgs = {
-      name: "JIMMIX",
-      symbol: "JMX",
-      decimals: 3,
-      isPausable: true,
-      isCapped: true,
-      cap: 10000000
-    };
-
     token = await GERC20.new(
       tokenArgs.name,
       tokenArgs.symbol,
