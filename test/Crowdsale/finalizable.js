@@ -77,4 +77,16 @@ contract("FinalizableCrowdsale", accounts => {
     const isFinalized = await crowdsale.isFinalized();
     assert.isTrue(isFinalized);
   });
+
+  it("should finalize crowdsale for invest more than softcap", async () => {
+    const invest = crowdsaleArgs.softcap;
+
+    await sleep(100);
+    await crowdsale.addInvestor(accounts[1], { from: accounts[0] });
+    await crowdsale.buyToken({ from: accounts[1], value: invest });
+    await sleep(10000);
+    await crowdsale.finalize();
+    const isFinalized = await crowdsale.isFinalized();
+    assert.isTrue(isFinalized);
+  });
 });
