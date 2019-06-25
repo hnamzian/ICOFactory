@@ -66,4 +66,15 @@ contract("FinalizableCrowdsale", accounts => {
       rounds[0].maxInvest
     );
   });
+
+  it("should finalize crowdsale for invest more than hardcap", async () => {
+    const invest = crowdsaleArgs.hardcap;
+
+    await sleep(100);
+    await crowdsale.addInvestor(accounts[1], { from: accounts[0] });
+    await crowdsale.buyToken({ from: accounts[1], value: invest });
+    await crowdsale.finalize();
+    const isFinalized = await crowdsale.isFinalized();
+    assert.isTrue(isFinalized);
+  });
 });
