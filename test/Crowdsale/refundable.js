@@ -1,0 +1,70 @@
+const GeneralCrowdsale = artifacts.require("./Crowdsale/GeneralCrowdsale");
+const GERC20 = artifacts.require("./Token/GERC20");
+
+const now = Math.floor(Date.now() / 1000);
+const rounds = [
+  {
+    opening: now,
+    duration: 10,
+    tokenWeiPrice: 1,
+    tokenCap: 1000,
+    minInvest: 10,
+    maxInvest: 25
+  }
+];
+
+const crowdsaleArgs = {
+  softcap: 15,
+  hardcap: 20,
+  maxIndividualEtherInves: 30
+};
+
+const tokenArgs = {
+  name: "JIMMIX",
+  symbol: "JMX",
+  decimals: 3,
+  isPausable: true,
+  isCapped: true,
+  cap: 10000000
+};
+
+let token;
+let crowdsale;
+
+function sleep(ms) {
+  return new Promise(resolve => {
+    setTimeout(resolve, ms);
+  });
+}
+
+contract("RefundableCrowdsale", accounts => {
+  beforeEach(async () => {
+    token = await GERC20.new(
+      tokenArgs.name,
+      tokenArgs.symbol,
+      tokenArgs.decimals,
+      tokenArgs.isPausable,
+      tokenArgs.isCapped,
+      tokenArgs.cap
+    );
+
+    crowdsale = await GeneralCrowdsale.new(
+      token.address,
+      crowdsaleArgs.softcap,
+      crowdsaleArgs.hardcap,
+      crowdsaleArgs.maxIndividualEtherInves
+    );
+
+    await token.addMinter(crowdsale.address, { from: accounts[0] });
+
+    await crowdsale.addRound(
+      rounds[0].opening,
+      rounds[0].duration,
+      rounds[0].tokenWeiPrice,
+      rounds[0].tokenCap,
+      rounds[0].minInvest,
+      rounds[0].maxInvest
+    );
+  });
+
+});
