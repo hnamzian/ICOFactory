@@ -16,14 +16,14 @@ contract("SalesRounds", accounts => {
     const rounds = [
       {
         opening: now,
-        duration: 1,
+        duration: 2,
         tokenWeiPrice: 1,
         tokenCap: 1000,
         minInvest: 10,
         maxInvest: 20
       },
       {
-        opening: now + 2,
+        opening: now + 3,
         duration: 2,
         tokenWeiPrice: 2,
         tokenCap: 2000,
@@ -53,7 +53,7 @@ contract("SalesRounds", accounts => {
     let tokenWeiPrice = await salesRounds.getTokenWeiPrice({ from: accounts[0] });
     assert.equal(+tokenWeiPrice, rounds[0].tokenWeiPrice);
 
-    await sleep(2500);
+    await sleep(4000);
     tokenWeiPrice = await salesRounds.getTokenWeiPrice({ from: accounts[0] });
     assert.equal(+tokenWeiPrice, rounds[1].tokenWeiPrice);
   });
