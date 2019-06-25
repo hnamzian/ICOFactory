@@ -10,6 +10,14 @@ const rounds = [
     tokenCap: 1000,
     minInvest: 10,
     maxInvest: 20
+  },
+  {
+    opening: now + 3,
+    duration: 2,
+    tokenWeiPrice: 1,
+    tokenCap: 1000,
+    minInvest: 10,
+    maxInvest: 20
   }
 ];
 
@@ -65,6 +73,15 @@ contract("Crowdsale", accounts => {
       rounds[0].minInvest,
       rounds[0].maxInvest
     );
+
+    await crowdsale.addRound(
+      rounds[1].opening,
+      rounds[1].duration,
+      rounds[1].tokenWeiPrice,
+      rounds[1].tokenCap,
+      rounds[1].minInvest,
+      rounds[1].maxInvest
+    );
   });
 
   it("should buy token", async () => {
@@ -93,4 +110,20 @@ contract("Crowdsale", accounts => {
 
     assert.isTrue(revert);
   });
+
+  it("should revert buying token less than minimum round invest", async () => {
+    let revert;
+    const invest = rounds[0].minInvest - 1;
+
+    await sleep(10);
+    await crowdsale.addInvestor(accounts[1], { from: accounts[0] });
+    try {
+      await crowdsale.buyToken({ from: accounts[1], value: invest });
+    } catch (ex) {
+      revert = ex.message.includes("revert");
+    }
+
+    assert.isTrue(revert);
+  });
+  
 });
