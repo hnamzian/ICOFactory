@@ -67,4 +67,15 @@ contract("Crowdsale", accounts => {
     );
   });
 
+  it("should buy token", async () => {
+    const invest = 20;
+
+    await sleep(10);
+    await crowdsale.addInvestor(accounts[1], { from: accounts[0] });
+    await crowdsale.buyToken({ from: accounts[1], value: invest });
+    const balance = await token.balanceOf(accounts[1]);
+    const investOf = await crowdsale.getRoundInvestOf(accounts[1], 0);
+    assert.equal(balance, invest / rounds[0].tokenWeiPrice);
+    assert.equal(investOf, invest);
+  });
 });
