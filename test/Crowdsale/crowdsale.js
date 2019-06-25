@@ -27,7 +27,7 @@ contract("Crowdsale", accounts => {
     const crowdsaleArgs = {
       softcap: 1000,
       hardcap: 100000,
-      maxIndividualEtherInves: 100
+      maxIndividualEtherInves: 30
     };
 
     const tokenArgs = {
