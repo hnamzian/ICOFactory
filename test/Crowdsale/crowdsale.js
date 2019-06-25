@@ -126,4 +126,22 @@ contract("Crowdsale", accounts => {
     assert.isTrue(revert);
   });
   
+  it("should revert buying token more than maximum individual invest", async () => {
+    let revert;
+    const firstInvest = rounds[0].maxInvest;
+    const secondInvest = 30;
+
+    await sleep(10);
+    await crowdsale.addInvestor(accounts[1], { from: accounts[0] });
+    try {
+      await crowdsale.buyToken({ from: accounts[1], value: firstInvest });
+      await sleep(4000);
+      await crowdsale.buyToken({ from: accounts[1], value: secondInvest });
+    } catch (ex) {
+      revert = ex.message.includes("revert");
+    }
+
+    assert.isTrue(revert);
+  });
+
 });
