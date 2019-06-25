@@ -78,4 +78,19 @@ contract("Crowdsale", accounts => {
     assert.equal(balance, invest / rounds[0].tokenWeiPrice);
     assert.equal(investOf, invest);
   });
+
+  it("should revert buying token more than maximum round invest", async () => {
+    let revert;
+    const invest = rounds[0].maxInvest + 1;
+
+    await sleep(10);
+    await crowdsale.addInvestor(accounts[1], { from: accounts[0] });
+    try {
+      await crowdsale.buyToken({ from: accounts[1], value: invest });
+    } catch (ex) {
+      revert = ex.message.includes("revert");
+    }
+
+    assert.isTrue(revert);
+  });
 });
