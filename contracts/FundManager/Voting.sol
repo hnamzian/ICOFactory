@@ -114,7 +114,8 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     VotingSession storage _lastVoting = closeProjectVoting[closeProjectVoting.length-1].votingSession;
     if(_lastVoting.voteOf[msg.sender] != _vote) {
       _lastVoting.voteOf[msg.sender] = _vote;
-      if(_vote) _lastVoting.positiveVotes.add(1);
+      if(_vote) _lastVoting.positiveVotes = _lastVoting.positiveVotes.add(1);
+      else _lastVoting.positiveVotes = _lastVoting.positiveVotes.sub(1);
       _lastVoting.state = _voteConsensus(_lastVoting.positiveVotes);
     }
   }
