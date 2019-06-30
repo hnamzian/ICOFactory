@@ -12,4 +12,7 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
     string message;
   }
   mapping (string => FundVoting) fundVotings;
+
+  uint256 internal minVotesToRaiseFund;
+
 }
