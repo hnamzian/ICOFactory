@@ -124,6 +124,10 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     return fundVoting[votingIndex].votingSession.state;
   }
 
+  function getCloseVotingStatus(uint votingIndex) public view returns (VotingState) {
+    return closeProjectVoting[votingIndex].votingSession.state;
+  }
+
   function claimFund(uint256 votingIndex) public onlyProjectOwner returns (uint256) {
     FundVoting storage _lastVoting = fundVoting[votingIndex];
     require(block.timestamp > _lastVoting.votingSession.ending, "Voting is still running");
