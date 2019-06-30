@@ -3,9 +3,10 @@ pragma solidity "0.5.2";
 import "../Token/GERC20.sol";
 import "./SalesRounds.sol";
 import "./WhitelistedInvestors.sol";
+import "./DetailedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
+contract BasicCrowdsale is DetailedCrowdsale, SalesRounds, WhitelistedInvestors {
   using SafeMath for uint256;
 
   GERC20 private _token;
@@ -15,14 +16,14 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
 
   mapping (address => uint256) internal _invests;
 
-
   event TokensPurchased(address indexed wallet, uint256 weiAmount, uint256 tokens);
 
   constructor(
     address tokenAddress,
     uint256 softcap, 
     uint256 hardcap, 
-    uint256 maxIndividualEtherInvest) public 
+    uint256 maxIndividualEtherInvest)
+    DetailedCrowdsale(softcap, hardcap, maxIndividualEtherInvest) public 
   {
     _token = GERC20(tokenAddress);
   }
