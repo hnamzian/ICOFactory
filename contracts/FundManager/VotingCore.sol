@@ -17,5 +17,28 @@ contract VotingCore {
   }
 
   mapping (bytes32 => VotingSession) votings;
-  uint8[] votingIds;
+  bytes32[] votingIds;
+
+  function createVoting(uint256 ending) internal returns (bytes32) {
+    VotingSession memory _voting = VotingSession({
+      state: VotingState.Denied,
+      finalized: false,
+      createdBy: msg.sender,
+      ending: ending,
+      positiveVotes: 0
+    });
+
+    bytes32 votingID = keccak256(
+      abi.encode(
+      _voting.state,
+      _voting.finalized,
+      _voting.createdBy,
+      _voting.ending,
+      _voting.positiveVotes,
+      block.timestamp));
+
+    votingIds.push(votingID);
+
+    return votingID;
+  }
 }
