@@ -11,4 +11,8 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
 
   uint256 internal minVotesToCloseProject;
 
+  constructor(uint256 _minVotesToCloseProject) public {
+    minVotesToCloseProject = _minVotesToCloseProject;
+  }
+
 }
