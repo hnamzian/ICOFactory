@@ -6,4 +6,10 @@ import "./VotingCore.sol";
 
 contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
 
+  struct FundVoting {
+    VotingSession votingSession;
+    uint256 requestedFund;
+    string message;
+  }
+  mapping (string => FundVoting) fundVotings;
 }
