@@ -15,18 +15,20 @@ contract VotingCore {
     address createdBy;
     uint256 ending;
     mapping (address => bool) voteOf;
+    uint256 minVotesConsensus;
     uint256 positiveVotes;
   }
 
   mapping (string => VotingSession) votings;
   string[] votingIds;
 
-  function createVoting(uint256 ending) internal returns (string memory) {
+  function createVoting(uint256 ending, uint256 minVotesConsensus) internal returns (string memory) {
     VotingSession memory voting = VotingSession({
       state: VotingState.Denied,
       finalized: false,
       createdBy: msg.sender,
       ending: ending,
+      minVotesConsensus: minVotesConsensus,
       positiveVotes: 0
     });
 
@@ -56,5 +58,7 @@ contract VotingCore {
       else voting.positiveVotes = voting.positiveVotes.sub(1);
     }
   }
+
+  
 
 }
