@@ -14,6 +14,10 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
 
   uint256 internal minVotesToRaiseFund;
 
+  constructor(uint256 _minVotesToRaiseFund) public {
+    minVotesToRaiseFund = _minVotesToRaiseFund;
+  }
+
   function createFundVoting(uint256 fund, uint256 ending, string memory message) public {
     FundVoting memory fundVoting = FundVoting({
       requestedFund: fund,
