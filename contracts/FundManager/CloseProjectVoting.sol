@@ -24,4 +24,9 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
     closeProjectVotings[votingID] = closeProjectVoting;
   }
 
+  function voteCloseProject(string memory _votingId, bool _vote) public {
+    vote(_votingId, _vote);
+    setVoteConsensus(_votingId);
+  }
+
 }
