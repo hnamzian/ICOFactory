@@ -18,4 +18,8 @@ contract DetailedCrowdsale {
     _maxIndividualEtherInvest = maxIndividualEtherInvest;
   }
 
+  function getSoftcap() public view returns (uint256) {
+    return _softcap;
+  }
+
 }
