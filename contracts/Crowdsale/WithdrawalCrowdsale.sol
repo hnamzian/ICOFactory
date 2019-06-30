@@ -24,6 +24,10 @@ contract WithdrawalCrowdsale is BasicCrowdsale {
     _withdrawalAddress = withdrawalAddress;
   }
 
+  function getWithdrawalAddress() public view returns (address) {
+    return _withdrawalAddress;
+  }
+
   function withdraw(uint256 fund) public onlyWithdrawManager returns (bool) {
     require(_withdrawalAddress != address(0), "Invalid withdrawal Address");
     require(fund < _etherRaised.sub(_totalWithdrawals), "Insufficient Funds");
