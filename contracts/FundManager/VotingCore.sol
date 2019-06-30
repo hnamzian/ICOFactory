@@ -59,6 +59,11 @@ contract VotingCore {
     }
   }
 
-  
+  function setVoteConsensus(string memory _votingId) internal {
+    VotingSession storage voting = votings[_votingId];
+    require(voting.createdBy != address(0), "Invalid voting session");
+    if (voting.positiveVotes >= voting.minVotesConsensus) voting.state = VotingState.Accepted;
+    voting.state = VotingState.Denied;
+  }
 
 }
