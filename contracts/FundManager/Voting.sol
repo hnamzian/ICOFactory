@@ -83,7 +83,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
       lastVoting = closeProjectVoting[closeProjectVoting.length-1];
       require(block.timestamp > lastVoting.votingSession.ending, "another voting session is still running");
     }
-    
+
     CloseProjectVoting memory _closeProjectVoting = CloseProjectVoting({
       votingSession: VotingSession({
         state: VotingState.Denied,
@@ -99,6 +99,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   }
 
   function voteFundRaising(bool _vote) public onlyOracle onlyFundVotingRunning {
+    require(fundVoting.length > 0, "No voting session exists");
     VotingSession storage _lastVoting = fundVoting[fundVoting.length-1].votingSession;
     if(_lastVoting.voteOf[msg.sender] != _vote) {
       _lastVoting.voteOf[msg.sender] = _vote;
