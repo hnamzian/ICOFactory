@@ -1,9 +1,11 @@
 pragma solidity ^0.5.2;
 
+import "../utils/bytesUtil.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract VotingCore {
   using SafeMath for uint256;
+  using bytesUtils for bytes32;
 
   enum VotingState {Accepted, Denied}
 
@@ -16,10 +18,10 @@ contract VotingCore {
     uint256 positiveVotes;
   }
 
-  mapping (bytes32 => VotingSession) votings;
-  bytes32[] votingIds;
+  mapping (string => VotingSession) votings;
+  string[] votingIds;
 
-  function createVoting(uint256 ending) internal returns (bytes32) {
+  function createVoting(uint256 ending) internal returns (string memory) {
     VotingSession memory _voting = VotingSession({
       state: VotingState.Denied,
       finalized: false,
@@ -36,9 +38,11 @@ contract VotingCore {
       _voting.ending,
       _voting.positiveVotes,
       block.timestamp));
+    string memory votingIDString = votingID.bytes32ToString();
 
-    votingIds.push(votingID);
+    votingIds.push(votingIDString);
 
-    return votingID;
+    return votingIDString;
   }
+
 }
