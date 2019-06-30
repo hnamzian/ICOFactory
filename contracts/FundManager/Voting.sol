@@ -132,9 +132,8 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
 
   function terminateProject() public onlyOracle {
     require(closeProjectVoting.length > 0, "No voting session exists");
-    CloseProjectVoting memory _lastVoting = closeProjectVoting[fundVoting.length-1];
+    CloseProjectVoting memory _lastVoting = closeProjectVoting[closeProjectVoting.length-1];
     require(block.timestamp > _lastVoting.votingSession.ending, "voting is not closed");
-
     if(_lastVoting.votingSession.state == VotingState.Accepted) Crowdsale.terminateProject();
   }
 
