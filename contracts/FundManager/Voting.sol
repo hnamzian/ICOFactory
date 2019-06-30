@@ -6,7 +6,7 @@ import "../Crowdsale/GeneralCrowdsale.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
 contract Voting is ProjectOwnerRole, WhitelistedOracles {
-  using SafeMath for uint8;
+  using SafeMath for uint256;
 
   GeneralCrowdsale Crowdsale;
 
@@ -18,7 +18,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     address createdBy;
     uint256 ending;
     mapping (address => bool) voteOf;
-    uint8 positiveVotes;
+    uint256 positiveVotes;
   }
 
   struct FundVoting {
@@ -35,7 +35,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   FundVoting[] fundVoting;
   CloseProjectVoting[] closeProjectVoting;
 
-  uint8 private _minVotes;
+  uint256 private _minVotes;
 
   constructor(address crowdsaleAddress) public {
     Crowdsale = GeneralCrowdsale(crowdsaleAddress);
@@ -109,7 +109,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     }
   }
 
-  function claimFund(uint8 votingIndex) public onlyProjectOwner returns (uint256) {
+  function claimFund(uint256 votingIndex) public onlyProjectOwner returns (uint256) {
     FundVoting storage _lastVoting = fundVoting[votingIndex];
     require(!_lastVoting.votingSession.finalized, "voting session has been finalized");
     Crowdsale.withdraw(_lastVoting.requestedFund);
@@ -122,7 +122,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     if(_lastVoting.votingSession.state == VotingState.Accepted) Crowdsale.terminateProject();
   }
 
-  function _voteConsensus(uint8 positiveVotes) internal view returns (VotingState) {
+  function _voteConsensus(uint256 positiveVotes) internal view returns (VotingState) {
     if (positiveVotes >= _minVotes) return VotingState.Accepted;
     return VotingState.Denied;
   }
