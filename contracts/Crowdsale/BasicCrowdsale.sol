@@ -33,6 +33,10 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
       _maxIndividualEtherInvest = maxIndividualEtherInvest;
   }
 
+  function getRaisedEther() public view returns (uint256) {
+    return _etherRaised;
+  }
+
   function buyToken() public payable onlySalesRunning {
     address wallet = msg.sender;
     uint256 weiAmount = msg.value;
