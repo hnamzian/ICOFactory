@@ -22,4 +22,7 @@ contract DetailedCrowdsale {
     return _softcap;
   }
 
+  function getHardcap() public view returns (uint256) {
+    return _hardcap;
+  }
 }
