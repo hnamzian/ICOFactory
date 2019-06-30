@@ -53,7 +53,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
     require(block.timestamp < _lastVoting.votingSession.ending, "no active voting");
     _;
   }
-  
+
   function requestFundVoting(uint256 fund, uint256 ending, string memory message) public onlyProjectOwner {
     FundVoting memory lastFundVoting;
     if (fundVoting.length > 0) {
@@ -78,9 +78,12 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   }
 
   function requestCloseProjectVoting(uint256 ending, string memory message) public onlyOracle {
-    CloseProjectVoting memory lastVoting = closeProjectVoting[closeProjectVoting.length-1];
-    require(block.timestamp > lastVoting.votingSession.ending, "another voting session is still running");
-
+    CloseProjectVoting memory lastVoting;
+    if (closeProjectVoting.length > 0) {
+      lastVoting = closeProjectVoting[closeProjectVoting.length-1];
+      require(block.timestamp > lastVoting.votingSession.ending, "another voting session is still running");
+    }
+    
     CloseProjectVoting memory _closeProjectVoting = CloseProjectVoting({
       votingSession: VotingSession({
         state: VotingState.Denied,
