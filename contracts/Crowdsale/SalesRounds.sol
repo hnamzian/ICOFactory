@@ -42,9 +42,13 @@ contract SalesRounds is Ownable {
   }
 
   function isSalesClosed() public view returns (bool) {
-    Round memory round;
-    if (block.timestamp > round.opening + round.duration) return true;
-    return false;
+    uint256 roundsLength = Rounds.length;
+    if (roundsLength > 0) {
+      Round memory round = Rounds[roundsLength-1];
+      if (block.timestamp > round.opening + round.duration) return true;
+      return false;
+    }
+    return true;
   }
 
   function addRound(
