@@ -22,7 +22,7 @@ contract VotingCore {
   string[] votingIds;
 
   function createVoting(uint256 ending) internal returns (string memory) {
-    VotingSession memory _voting = VotingSession({
+    VotingSession memory voting = VotingSession({
       state: VotingState.Denied,
       finalized: false,
       createdBy: msg.sender,
@@ -32,14 +32,15 @@ contract VotingCore {
 
     bytes32 votingID = keccak256(
       abi.encode(
-      _voting.state,
-      _voting.finalized,
-      _voting.createdBy,
-      _voting.ending,
-      _voting.positiveVotes,
+      voting.state,
+      voting.finalized,
+      voting.createdBy,
+      voting.ending,
+      voting.positiveVotes,
       block.timestamp));
     string memory votingIDString = votingID.bytes32ToString();
 
+    votings[votingIDString] = voting;
     votingIds.push(votingIDString);
 
     return votingIDString;
