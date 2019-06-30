@@ -110,6 +110,7 @@ contract Voting is ProjectOwnerRole, WhitelistedOracles {
   }
 
   function voteCloseProject(bool _vote) public onlyOracle onlyCloseProjectVotingRunning {
+    require(closeProjectVoting.length > 0, "No voting session exists");
     VotingSession storage _lastVoting = closeProjectVoting[closeProjectVoting.length-1].votingSession;
     if(_lastVoting.voteOf[msg.sender] != _vote) {
       _lastVoting.voteOf[msg.sender] = _vote;
