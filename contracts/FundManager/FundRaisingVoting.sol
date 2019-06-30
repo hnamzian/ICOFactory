@@ -14,4 +14,14 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
 
   uint256 internal minVotesToRaiseFund;
 
+  function createFundVoting(uint256 fund, uint256 ending, string memory message) public {
+    FundVoting memory fundVoting = FundVoting({
+      requestedFund: fund,
+      message: message
+    });
+
+    string memory votingID = createVoting(ending, minVotesToRaiseFund);
+    fundVotings[votingID] = fundVoting;
+  }
+
 }
