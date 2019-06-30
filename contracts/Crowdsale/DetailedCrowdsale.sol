@@ -25,4 +25,8 @@ contract DetailedCrowdsale {
   function getHardcap() public view returns (uint256) {
     return _hardcap;
   }
+
+  function getMaxIndividualEtherInvest() public view returns (uint256) {
+    return _maxIndividualEtherInvest;
+  }
 }
