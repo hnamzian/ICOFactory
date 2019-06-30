@@ -15,4 +15,13 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
     minVotesToCloseProject = _minVotesToCloseProject;
   }
 
+  function createCloseProjectVoting(uint256 ending, string memory message) public {
+    CloseProjectVoting memory closeProjectVoting = CloseProjectVoting({
+      message: message
+    });
+
+    string memory votingID = createVoting(ending, minVotesToCloseProject);
+    closeProjectVotings[votingID] = closeProjectVoting;
+  }
+
 }
