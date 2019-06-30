@@ -10,12 +10,8 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
 
   GERC20 private _token;
 
-  uint256 internal _softcap;
-  uint256 internal _hardcap;
   uint256 internal _etherRaised;
   uint256 internal _totalWithdrawals;
-
-  uint256 private _maxIndividualEtherInvest;
 
   mapping (address => uint256) internal _invests;
 
@@ -26,11 +22,9 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
     address tokenAddress,
     uint256 softcap, 
     uint256 hardcap, 
-    uint256 maxIndividualEtherInvest) public {
-      _token = GERC20(tokenAddress);
-      _softcap = softcap;
-      _hardcap = hardcap;
-      _maxIndividualEtherInvest = maxIndividualEtherInvest;
+    uint256 maxIndividualEtherInvest) public 
+  {
+    _token = GERC20(tokenAddress);
   }
 
   function getRaisedEther() public view returns (uint256) {
