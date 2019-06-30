@@ -46,4 +46,15 @@ contract VotingCore {
     return votingIDString;
   }
 
+  function vote(string memory _votingId, bool _vote) internal {
+    VotingSession storage voting = votings[_votingId];
+    require(block.timestamp <= voting.ending, "Invalid Voting session to vote");
+
+    if(voting.voteOf[msg.sender] != _vote) {
+      voting.voteOf[msg.sender] = _vote;
+      if(_vote) voting.positiveVotes = voting.positiveVotes.add(1);
+      else voting.positiveVotes = voting.positiveVotes.sub(1);
+    }
+  }
+
 }
