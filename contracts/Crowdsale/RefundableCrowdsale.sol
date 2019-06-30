@@ -7,7 +7,7 @@ contract RefundableCrowdsale is FinalizableCrowdsale {
     
   function refund(address payable investor) public {
     require(state == State.Refunding  || state == State.Terminated);
-    require(_invests[investor] != 0);
+    require(_invests[investor] != 0, "Amount of remaining invest is zero");
 
     uint256 refundValue = _etherRaised.sub(_totalWithdrawals).mul(_invests[investor]).div(_etherRaised);
     _invests[investor] = 0;
