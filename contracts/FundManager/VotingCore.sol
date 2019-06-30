@@ -15,4 +15,7 @@ contract VotingCore {
     mapping (address => bool) voteOf;
     uint256 positiveVotes;
   }
+
+  mapping (bytes32 => VotingSession) votings;
+  uint8[] votingIds;
 }
