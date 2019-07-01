@@ -15,6 +15,8 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
 
   uint256 internal minVotesToRaiseFund;
 
+  event FundRaisingVotingCreated(string votingID);
+
   constructor(uint256 _minVotesToRaiseFund) public {
     minVotesToRaiseFund = _minVotesToRaiseFund;
   }
@@ -33,6 +35,8 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
 
     string memory votingID = createVoting(ending, minVotesToRaiseFund);
     fundVotings[votingID] = fundVoting;
+
+    emit FundRaisingVotingCreated(votingID);
   }
 
   function voteFundRaising(string memory _votingId, bool _vote) public {
