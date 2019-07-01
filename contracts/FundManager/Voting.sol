@@ -28,12 +28,16 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
   }
 
   function claimFund(uint256 votingIndex) public onlyProjectOwner returns (uint256) {
-    FundVoting storage _lastVoting = fundVoting[votingIndex];
-    require(block.timestamp > _lastVoting.votingSession.ending, "Voting is still running");
-    require(!_lastVoting.votingSession.finalized, "voting session has not been finalized");
-    if (_lastVoting.votingSession.state == VotingState.Accepted) {
-      bool withdrawResult = Crowdsale.withdraw(_lastVoting.requestedFund);
-      _lastVoting.votingSession.finalized = withdrawResult;
+    FundVoting storage _fundVoting = fundVotings[votingIndex];
+    require(_fundVoting.requestedFund > 0, "Invalid requested fund");
+
+    VotingSession storage _votingSession = votings[votingIndex];
+    require(block.timestamp > _votingSession.ending, "Voting is still running");
+    require(!_votingSession.finalized, "voting session has not been finalized");
+
+    if (_votingSession.state == VotingState.Accepted) {
+      bool withdrawResult = Crowdsale.withdraw(_fundVoting.requestedFund);
+      _votingSession.finalized = withdrawResult;
     }
   }
 
