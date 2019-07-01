@@ -26,7 +26,9 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
     return true;
   }
 
-  function createFundVoting(uint256 fund, uint256 ending, string memory message) public {
+  function createFundVoting(uint256 fund, uint256 ending, string memory message)
+    public
+    onlyProjectOwner {
     FundVoting memory fundVoting = FundVoting({
       requestedFund: fund,
       message: message,
