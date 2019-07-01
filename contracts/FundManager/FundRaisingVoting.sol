@@ -36,6 +36,7 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
   }
 
   function voteFundRaising(string memory _votingId, bool _vote) public {
+    validateFundVoting(_votingId);
     vote(_votingId, _vote);
     setVoteConsensus(_votingId);
   }
