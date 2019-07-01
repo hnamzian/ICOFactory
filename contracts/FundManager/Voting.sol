@@ -10,6 +10,8 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
 
   GeneralCrowdsale Crowdsale;
 
+  event FundClaimed(string votingID, uint256 fund);
+
   constructor(
     address crowdsaleAddress,
     uint256 _minVotesToRaiseFund,
@@ -37,6 +39,8 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
     if (_votingSession.state == VotingState.Accepted) {
       bool withdrawResult = Crowdsale.withdraw(_fundVoting.requestedFund);
       _votingSession.finalized = withdrawResult;
+
+      emit FundClaimed(votingIndex, _fundVoting.requestedFund);
     }
   }
 
