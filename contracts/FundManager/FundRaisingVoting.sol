@@ -9,6 +9,7 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
   struct FundVoting {
     uint256 requestedFund;
     string message;
+    bool isValid;
   }
   mapping (string => FundVoting) fundVotings;
 
@@ -21,7 +22,8 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
   function createFundVoting(uint256 fund, uint256 ending, string memory message) public {
     FundVoting memory fundVoting = FundVoting({
       requestedFund: fund,
-      message: message
+      message: message,
+      isValid: true
     });
 
     string memory votingID = createVoting(ending, minVotesToRaiseFund);
