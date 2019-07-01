@@ -22,6 +22,12 @@ contract VotingCore {
   mapping (string => VotingSession) votings;
   string[] votingIds;
 
+  modifier whenVotingIsRunning(string memory votingID) {
+    VotingSession memory _voting = votings[votingID];
+    require(block.timestamp <= _voting.ending, "Voting session has ended");
+    _;
+  }
+
   function createVoting(uint256 ending, uint256 minVotesConsensus) internal returns (string memory) {
     VotingSession memory voting = VotingSession({
       state: VotingState.Denied,
