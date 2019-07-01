@@ -4,10 +4,10 @@ import "./WhitelistedOracles.sol";
 import "./VotingCore.sol";
 
 contract CloseProjectVoting is VotingCore, WhitelistedOracles {
-  struct CloseProjectVoting {
+  struct CloseProjectVotingData {
     string message;
   }
-  mapping (string => CloseProjectVoting) closeProjectVotings;
+  mapping (string => CloseProjectVotingData) closeProjectVotings;
 
   uint256 internal minVotesToCloseProject;
 
@@ -16,7 +16,7 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
   }
 
   function createCloseProjectVoting(uint256 ending, string memory message) public {
-    CloseProjectVoting memory closeProjectVoting = CloseProjectVoting({
+    CloseProjectVotingData memory closeProjectVoting = CloseProjectVotingData({
       message: message
     });
 
