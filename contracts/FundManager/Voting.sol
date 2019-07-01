@@ -41,11 +41,14 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
     }
   }
 
-  function terminateProject() public onlyOracle {
-    require(closeProjectVoting.length > 0, "No voting session exists");
-    CloseProjectVoting memory _lastVoting = closeProjectVoting[closeProjectVoting.length-1];
-    require(block.timestamp > _lastVoting.votingSession.ending, "voting is still running");
-    if(_lastVoting.votingSession.state == VotingState.Accepted) Crowdsale.terminateProject();
+  function terminateProject(uint256 votingIndex) public onlyOracle {
+    VotingSession storage _votingSession = votings[votingIndex];
+    require(block.timestamp > _votingSession.ending, "Voting is still running");
+    require(!_votingSession.finalized, "voting session has not been finalized");
+    if(_votingSession.state == VotingState.Accepted) {
+      Crowdsale.terminateProject();
+      _votingSession.finalized = true;
+    }
   }
 
 }
