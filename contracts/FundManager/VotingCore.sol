@@ -31,6 +31,22 @@ contract VotingCore {
     return votings[_votingId].voteOf[msg.sender];
   }
 
+  function getVotingSession(string memory _votingId)
+    public
+    view
+    returns (VotingState, bool, address, uint256, uint256, uint256)
+  {
+    VotingSession memory _voting = votings[_votingId];
+    return (
+      _voting.state,
+      _voting.finalized,
+      _voting.createdBy,
+      _voting.ending,
+      _voting.minVotesConsensus,
+      _voting.positiveVotes
+    );
+  }
+
   function createVoting(uint256 ending, uint256 minVotesConsensus) internal returns (string memory) {
     VotingSession memory voting = VotingSession({
       state: VotingState.Denied,
