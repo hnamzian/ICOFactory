@@ -20,7 +20,6 @@ contract VotingCore {
   }
 
   mapping (string => VotingSession) votings;
-  string[] votingIds;
 
   modifier whenVotingIsRunning(string memory votingID) {
     VotingSession memory _voting = votings[votingID];
@@ -49,7 +48,6 @@ contract VotingCore {
     string memory votingIDString = votingID.bytes32ToString();
 
     votings[votingIDString] = voting;
-    votingIds.push(votingIDString);
 
     return votingIDString;
   }
