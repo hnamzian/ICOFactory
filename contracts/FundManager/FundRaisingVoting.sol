@@ -21,6 +21,11 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
     minVotesToRaiseFund = _minVotesToRaiseFund;
   }
 
+  function setMinVotesToRaiseFund(uint256 _minVotesToRaiseFund) public onlyOwner {
+    require(_minVotesToRaiseFund > 0, "Invalid value to set minimum votes");
+    minVotesToRaiseFund = _minVotesToRaiseFund;
+  }
+
   function validateFundVoting(string memory votingID) internal returns (bool) {
     require(fundVotings[votingID].isValid == true, "Invalid Fund Raising Voting");
     return true;
