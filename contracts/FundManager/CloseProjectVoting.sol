@@ -25,8 +25,7 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
 
   function createCloseProjectVoting(uint256 ending, string memory message)
     public
-    onlyOracle
-  {
+    onlyOracle {
     CloseProjectVotingData memory closeProjectVoting = CloseProjectVotingData({
       message: message,
       isValid: true
@@ -38,7 +37,9 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
     emit CloseProjectVotingCreated(votingID);
   }
 
-  function voteCloseProject(string memory _votingId, bool _vote) public {
+  function voteCloseProject(string memory _votingId, bool _vote)
+    public
+    onlyOracle {
     validateCloseProjectVoting(_votingId);
     vote(_votingId, _vote);
     setVoteConsensus(_votingId);
