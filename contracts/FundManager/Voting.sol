@@ -26,6 +26,7 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
     whenVotingIsRunning(votingIndex)
     returns (uint256)
   {
+    validateFundVoting(votingIndex);
     FundVoting storage _fundVoting = fundVotings[votingIndex];
     require(_fundVoting.requestedFund > 0, "Invalid requested fund");
 
