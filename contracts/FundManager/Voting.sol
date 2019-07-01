@@ -45,6 +45,7 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
     onlyOracle
     whenVotingIsRunning(votingIndex)
   {
+    validateCloseProjectVoting(votingIndex);
     VotingSession storage _votingSession = votings[votingIndex];
     require(block.timestamp > _votingSession.ending, "Voting is still running");
     require(!_votingSession.finalized, "voting session has not been finalized");
