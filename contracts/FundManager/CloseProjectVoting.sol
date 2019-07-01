@@ -12,6 +12,8 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
 
   uint256 internal minVotesToCloseProject;
 
+  event CloseProjectVotingCreated(string votingID);
+
   constructor(uint256 _minVotesToCloseProject) public {
     minVotesToCloseProject = _minVotesToCloseProject;
   }
@@ -29,6 +31,8 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
 
     string memory votingID = createVoting(ending, minVotesToCloseProject);
     closeProjectVotings[votingID] = closeProjectVoting;
+
+    emit CloseProjectVotingCreated(votingID);
   }
 
   function voteCloseProject(string memory _votingId, bool _vote) public {
