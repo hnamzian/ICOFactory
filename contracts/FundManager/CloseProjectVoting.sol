@@ -18,6 +18,11 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
     minVotesToCloseProject = _minVotesToCloseProject;
   }
 
+  function setMinVotesToCloseProject(uint256 _minVotesToCloseProject) public onlyOwner {
+    require(_minVotesToCloseProject > 0, "Invalid value to set minimum votes");
+    minVotesToCloseProject = _minVotesToCloseProject;
+  }
+
   function validateCloseProjectVoting(string memory votingID) internal returns (bool) {
     require(closeProjectVotings[votingID].isValid == true, "Invalid Close Project Voting");
     return true;
