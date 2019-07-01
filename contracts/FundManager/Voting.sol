@@ -40,7 +40,7 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
     }
   }
 
-  function terminateProject(string memory votingIndex)
+  function closeProject(string memory votingIndex)
     public
     onlyOracle
     whenVotingIsRunning(votingIndex)
