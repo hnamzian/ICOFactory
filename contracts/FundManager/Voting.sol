@@ -11,6 +11,7 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
   GeneralCrowdsale Crowdsale;
 
   event FundClaimed(string votingID, uint256 fund);
+  event ProjectClosed(string votingID);
 
   constructor(
     address crowdsaleAddress,
@@ -56,6 +57,7 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
     if(_votingSession.state == VotingState.Accepted) {
       Crowdsale.terminateProject();
       _votingSession.finalized = true;
+      emit ProjectClosed(votingIndex);
     }
   }
 
