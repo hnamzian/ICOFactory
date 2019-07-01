@@ -1,17 +1,11 @@
 pragma solidity ^0.5.2;
 
-import "./ProjectOwnerRole.sol";
-import "./WhitelistedOracles.sol";
 import "../Crowdsale/GeneralCrowdsale.sol";
 import "./FundRaisingVoting.sol";
 import "./CloseProjectVoting.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract Voting is
-  FundRaisingVoting,
-  CloseProjectVoting,
-  ProjectOwnerRole,
-  WhitelistedOracles {
+contract Voting is FundRaisingVoting, CloseProjectVoting {
   using SafeMath for uint256;
 
   GeneralCrowdsale Crowdsale;
