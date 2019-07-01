@@ -23,7 +23,10 @@ contract CloseProjectVoting is VotingCore, WhitelistedOracles {
     return true;
   }
 
-  function createCloseProjectVoting(uint256 ending, string memory message) public {
+  function createCloseProjectVoting(uint256 ending, string memory message)
+    public
+    onlyOracle
+  {
     CloseProjectVotingData memory closeProjectVoting = CloseProjectVotingData({
       message: message,
       isValid: true
