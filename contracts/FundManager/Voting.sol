@@ -14,13 +14,6 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
     Crowdsale = GeneralCrowdsale(crowdsaleAddress);
   }
 
-  modifier onlyCloseProjectVotingRunning() {
-    require(closeProjectVoting.length > 0, "No voting session exists");
-    CloseProjectVoting memory _lastVoting = closeProjectVoting[closeProjectVoting.length-1];
-    require(block.timestamp < _lastVoting.votingSession.ending, "no active voting");
-    _;
-  }
-
   function claimFund(uint256 votingIndex) public onlyProjectOwner returns (uint256) {
     FundVoting storage _fundVoting = fundVotings[votingIndex];
     require(_fundVoting.requestedFund > 0, "Invalid requested fund");
