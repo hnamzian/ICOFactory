@@ -10,7 +10,13 @@ contract Voting is FundRaisingVoting, CloseProjectVoting {
 
   GeneralCrowdsale Crowdsale;
 
-  constructor(address crowdsaleAddress) public {
+  constructor(
+    address crowdsaleAddress,
+    uint256 _minVotesToRaiseFund,
+    uint256 _minVotesToCloseProject)
+    FundRaisingVoting(_minVotesToRaiseFund)
+    CloseProjectVoting(_minVotesToCloseProject)
+    public {
     Crowdsale = GeneralCrowdsale(crowdsaleAddress);
   }
 
