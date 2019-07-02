@@ -10,11 +10,11 @@ contract TerminatorRole is Ownable {
     _;
   }
 
-  function setTerminatationManager(address terminator) public onlyOwner {
+  function setTerminator(address terminator) public onlyOwner {
     _terminator = terminator;
   }
 
-  function getTerminatorManager() public view returns (address) {
+  function getTerminator() public view returns (address) {
     return _terminator;
   }
 }
