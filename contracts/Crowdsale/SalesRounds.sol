@@ -71,6 +71,7 @@ contract SalesRounds is Ownable {
   }
 
   function removeRound(uint8 roundIndex) public onlyOwner {
+    require(!isSalesStarted(), "Action not permitted after Sales Rounds started");
     _removeRound(roundIndex);
   }
 
