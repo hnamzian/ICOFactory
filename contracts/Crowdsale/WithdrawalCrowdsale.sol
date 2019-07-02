@@ -1,28 +1,15 @@
 pragma solidity "0.5.2";
 
 import "./BasicCrowdsale.sol";
+import "./WithdrawManagerRole.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract WithdrawalCrowdsale is BasicCrowdsale {
+contract WithdrawalCrowdsale is BasicCrowdsale, WithdrawManagerRole {
   using SafeMath for uint256;
 
-  address private _withdrawManager;
   address payable _withdrawalAddress;
 
   event FundWithdrawn(address _withdrawalAddress, uint256 _fund);
-
-  modifier onlyWithdrawManager() {
-    require(msg.sender == _withdrawManager, "you are not permitted");
-    _;
-  }
-
-  function setWithdrawManager(address withdrawManager) public onlyOwner {
-    _withdrawManager = withdrawManager;
-  }
-
-  function getWithdrawalManager() public view returns (address) {
-    return _withdrawManager;
-  }
 
   function setWithdrawalAddress(address payable withdrawalAddress) public onlyOwner {
     _withdrawalAddress = withdrawalAddress;
