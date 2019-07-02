@@ -66,6 +66,7 @@ contract SalesRounds is Ownable {
     uint256 _tokenCap,
     uint256 _minInvest,
     uint256 _maxInvest) public onlyOwner {
+    require(!isSalesStarted(), "Action not permitted after Sales Rounds started");
     _addRound(_opening, _duration, _tokenWeiPrice, _tokenCap, _minInvest, _maxInvest);
   }
 
