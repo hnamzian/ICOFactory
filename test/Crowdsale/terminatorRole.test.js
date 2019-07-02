@@ -12,4 +12,14 @@ contract("WitdrawMangerRole", accounts => {
     const terminatorAddress = await terminator.getTerminator();
     assert.equal(terminatorAddress, accounts[1]);
   });
+
+  it("should fail to set terminator by address is not owner", async () => {
+    let revert;
+    try {
+      await terminator.setTerminator(accounts[1], { from: accounts[2] });
+    } catch (ex) {
+      revert = ex.message.includes("revert");
+    }
+    assert.isTrue(revert);
+  });
 });
