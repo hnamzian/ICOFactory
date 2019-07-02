@@ -20,6 +20,10 @@ contract WithdrawalCrowdsale is BasicCrowdsale {
     _withdrawManager = withdrawManager;
   }
 
+  function getWithdrawalManager() public view returns (address) {
+    return _withdrawManager;
+  }
+
   function setWithdrawalAddress(address payable withdrawalAddress) public onlyOwner {
     _withdrawalAddress = withdrawalAddress;
   }
