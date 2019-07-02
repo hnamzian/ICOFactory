@@ -34,7 +34,7 @@ contract FundRaisingVoting is VotingCore, WhitelistedOracles, ProjectOwnerRole {
     return (fundVoting.requestedFund, fundVoting.message, fundVoting.isValid);
   }
 
-  function validateFundVoting(string memory votingID) internal returns (bool) {
+  function validateFundVoting(string memory votingID) internal view returns (bool) {
     require(fundVotings[votingID].isValid == true, "Invalid Fund Raising Voting");
     return true;
   }
