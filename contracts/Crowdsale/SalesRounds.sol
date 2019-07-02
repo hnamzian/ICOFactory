@@ -30,6 +30,14 @@ contract SalesRounds is Ownable {
     _;
   }
 
+  function isSalesStarted() public view returns (bool) {
+    uint256 roundsLength = Rounds.length;
+    if (roundsLength > 0) {
+      return (block.timestamp > Rounds[0].opening) ? true : false;
+    }
+    return false;
+  }
+
   function isSalesRunning() public view returns (bool) {
     Round memory round;
     for (uint8 i = 0; i < Rounds.length; i++) {
