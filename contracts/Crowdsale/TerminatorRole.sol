@@ -13,4 +13,8 @@ contract TerminatorRole is Ownable {
   function setTerminatationManager(address terminator) public onlyOwner {
     _terminator = terminator;
   }
+
+  function getTerminatorManager() public view returns (address) {
+    return _terminator;
+  }
 }
