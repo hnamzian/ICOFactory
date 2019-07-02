@@ -30,6 +30,14 @@ contract SalesRounds is Ownable {
     _;
   }
 
+  function isSalesStarted() public view returns (bool) {
+    uint256 roundsLength = Rounds.length;
+    if (roundsLength > 0) {
+      return (block.timestamp > Rounds[0].opening) ? true : false;
+    }
+    return false;
+  }
+
   function isSalesRunning() public view returns (bool) {
     Round memory round;
     for (uint8 i = 0; i < Rounds.length; i++) {
@@ -42,9 +50,13 @@ contract SalesRounds is Ownable {
   }
 
   function isSalesClosed() public view returns (bool) {
-    Round memory round;
-    if (block.timestamp > round.opening + round.duration) return true;
-    return false;
+    uint256 roundsLength = Rounds.length;
+    if (roundsLength > 0) {
+      Round memory round = Rounds[roundsLength-1];
+      if (block.timestamp > round.opening + round.duration) return true;
+      return false;
+    }
+    return true;
   }
 
   function addRound(
@@ -54,10 +66,12 @@ contract SalesRounds is Ownable {
     uint256 _tokenCap,
     uint256 _minInvest,
     uint256 _maxInvest) public onlyOwner {
+    require(!isSalesStarted(), "Action not permitted after Sales Rounds started");
     _addRound(_opening, _duration, _tokenWeiPrice, _tokenCap, _minInvest, _maxInvest);
   }
 
   function removeRound(uint8 roundIndex) public onlyOwner {
+    require(!isSalesStarted(), "Action not permitted after Sales Rounds started");
     _removeRound(roundIndex);
   }
 

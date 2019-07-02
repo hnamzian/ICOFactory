@@ -3,22 +3,18 @@ pragma solidity "0.5.2";
 import "../Token/GERC20.sol";
 import "./SalesRounds.sol";
 import "./WhitelistedInvestors.sol";
+import "./DetailedCrowdsale.sol";
 import "openzeppelin-solidity/contracts/math/SafeMath.sol";
 
-contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
+contract BasicCrowdsale is DetailedCrowdsale, SalesRounds, WhitelistedInvestors {
   using SafeMath for uint256;
 
   GERC20 private _token;
 
-  uint256 internal _softcap;
-  uint256 internal _hardcap;
   uint256 internal _etherRaised;
   uint256 internal _totalWithdrawals;
 
-  uint256 private _maxIndividualEtherInvest;
-
   mapping (address => uint256) internal _invests;
-
 
   event TokensPurchased(address indexed wallet, uint256 weiAmount, uint256 tokens);
 
@@ -26,11 +22,14 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
     address tokenAddress,
     uint256 softcap, 
     uint256 hardcap, 
-    uint256 maxIndividualEtherInvest) public {
-      _token = GERC20(tokenAddress);
-      _softcap = softcap;
-      _hardcap = hardcap;
-      _maxIndividualEtherInvest = maxIndividualEtherInvest;
+    uint256 maxIndividualEtherInvest)
+    DetailedCrowdsale(softcap, hardcap, maxIndividualEtherInvest) public 
+  {
+    _token = GERC20(tokenAddress);
+  }
+
+  function getRaisedEther() public view returns (uint256) {
+    return _etherRaised;
   }
 
   function buyToken() public payable onlySalesRunning {
@@ -50,7 +49,7 @@ contract BasicCrowdsale is SalesRounds, WhitelistedInvestors {
     require(wallet != address(0), "invalid wallet address");
     require(weiAmount != 0, "invalid amount of invest");
     require(isInvestor(wallet), "wallet is not whitelisted");
-    require(_etherRaised.add(weiAmount) < _hardcap, "hardcap reached");
+    require(_etherRaised.add(weiAmount) <= _hardcap, "hardcap reached");
     require(_invests[wallet].add(weiAmount) < _maxIndividualEtherInvest, "individual invest cap reached");
     
     uint8 roundIndex = _getRoundIndex();
