@@ -15,4 +15,10 @@ contract("WithdrawalWallet", accounts => {
     const _softcap = await detailedCrowdsale.getSoftcap()
     assert.equal(_softcap, softcap);
   })
+
+  it("should get hardcap", async () => {
+    const _hardcap = await detailedCrowdsale.getHardcap()
+    assert.equal(_hardcap, hardcap);
+  })
+
 });
