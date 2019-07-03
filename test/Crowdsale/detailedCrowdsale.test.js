@@ -10,4 +10,9 @@ contract("WithdrawalWallet", accounts => {
   beforeEach(async () => {
     detailedCrowdsale = await DetailedCrowdsale.new(softcap, hardcap, maxIndividualEtherInvest);
   });
+
+  it("should get softcap", async () => {
+    const _softcap = await detailedCrowdsale.getSoftcap()
+    assert.equal(_softcap, softcap);
+  })
 });
