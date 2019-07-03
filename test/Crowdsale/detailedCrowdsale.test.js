@@ -12,13 +12,17 @@ contract("WithdrawalWallet", accounts => {
   });
 
   it("should get softcap", async () => {
-    const _softcap = await detailedCrowdsale.getSoftcap()
+    const _softcap = await detailedCrowdsale.getSoftcap();
     assert.equal(_softcap, softcap);
-  })
+  });
 
   it("should get hardcap", async () => {
-    const _hardcap = await detailedCrowdsale.getHardcap()
+    const _hardcap = await detailedCrowdsale.getHardcap();
     assert.equal(_hardcap, hardcap);
-  })
+  });
 
+  it("should get maxIndividualEtherInvest", async () => {
+    const _maxIndividualEtherInvest = await detailedCrowdsale.getMaxIndividualEtherInvest();
+    assert.equal(_maxIndividualEtherInvest, maxIndividualEtherInvest);
+  });
 });
